@@ -31,14 +31,25 @@ export default function RootLayout({ children }) {
         </header>
         {children}
         <footer >
-            <div>
+            <div className="top">
               <div>
-                contact
+                <h3>Contact</h3>
+                  <li> Craig Darrach</li>
+                  <li>Loftmaker@live.co.uk</li>
+                  <li>07736777527</li>
               </div>
               <div>
-                office hours
+                <h3>Office hours </h3>
+                <ul>
+                  <li>Mon -Fri 8:00 - 18:00</li>
+                  <li> Sat: 10:00 - 15:00</li>
+                  <li> Sunday ClOSED</li>
+                </ul>
               </div>
-              <div>Loft Maker London</div>
+              <div>
+                <h3>Loft Maker London</h3>
+                <p>High quality, reliable, personal contracting and construction services throughout the London and wider Essex region.</p>
+              </div>
             </div>
         </footer>
       </body>

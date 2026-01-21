@@ -24,7 +24,7 @@
   width: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: var(--foreground);
 }
 
@@ -35,6 +35,7 @@
   text-align: center;
   gap: 24px;
   max-width: 80vw;
+  margin-bottom: 10vh;
 }
 
 .intro h3 {
@@ -148,11 +149,19 @@ a.secondary {
   margin-bottom: 40px;
 }
 
+.PreviousProject{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30vh;
+  width: 80vw;
 
-.intro{
-  background-color: red;
-
-
-  
 }
 
+.PreviousProject h3{
+  margin-left: 5vw;
+  font-size: 30px;
+  padding-bottom: 2vh;
+  border-bottom: 2px grey solid;
+  width: 25vw;
+  margin-bottom: 3vh;
+}

@@ -1,9 +1,18 @@
 .gallery {
-    height: 10vh;
+    height: 60vh;
   display: flex;
+
   margin-left: 4vw;
   gap: 8px;
 }
+
+@media (max-width: 800px){
+    .gallery{
+          flex-direction: column;
+          margin-left: 0vw;
+    }
+}
+
 
 /* flex item that actually has height */
 .item {

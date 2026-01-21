@@ -16,6 +16,9 @@ body {
   overflow-x: hidden;
 }
 
+li{
+  list-style: none;
+}
 body {
   color: var(--foreground);
   background: var(--background);
@@ -48,8 +51,35 @@ header{
 }
 
 footer{
-  height: 30vh;
+  height: 60vh;
   background-color: red;
+}
+.top{
+
+  height: 50%;
+  display: flex;
+  width: 100%;
+  justify-content:  space-evenly;
+  font-size: 20px;
+}
+
+.top div{
+
+  width: 30%;
+  display: flex;
+  justify-content: left;
+  padding: 1rem;
+  border-left: 2px grey solid;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.top li{
+  padding: 10px;
+}
+.top p{
+  padding: 25px;
 }
 
 .display{

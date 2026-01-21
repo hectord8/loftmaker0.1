@@ -30,7 +30,7 @@ export default function Home() {
           </p>
           <h4>Contact us today to schedule a free intial consultation.</h4>
         </section>
-        <section>
+        <section className={styles.PreviousProject}>
           <h3>Previous Project</h3>
         <PreviosuProject/>
         </section>
