@@ -35,6 +35,32 @@ a {
   text-decoration: none;
 }
 
+
+header{
+  position: fixed;
+  width: 90%;
+  top: 1rem;
+  justify-self: center;
+  align-items: center;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+}
+
+.display{
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .display{
+    display: none;
+  }
+
+  header{
+    justify-content: right;
+  }
+  
+}
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
