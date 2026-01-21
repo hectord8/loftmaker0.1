@@ -1,6 +1,14 @@
 import Image from "next/image";
-import styles from "../app/page.module.css"
-export default function ResponsiveImage({large , medium, small }) {
+import styles from "../app/page.module.css";
+
+export default function ResponsiveImage({
+  large,
+  medium,
+  small,
+  alt,
+  sizes = "100vw",
+  priority = false,
+}) {
   return (
     <picture>
       <source media="(max-width: 640px)" srcSet={small} />
@@ -9,10 +17,11 @@ export default function ResponsiveImage({large , medium, small }) {
       <Image
         className={styles.image}
         src={large}
-        alt="Hero"
+        alt={alt}
         fill
-        sizes="100vw"
+        sizes={sizes}
         style={{ objectFit: 'cover' }} 
+        priority={priority}
       />
 
     </picture>

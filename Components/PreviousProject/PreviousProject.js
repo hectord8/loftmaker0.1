@@ -1,27 +1,22 @@
-'use client'
+"use client";
 import Image from "next/image";
 
-import styles from "./previous.module.css"
-export default function PreviosuProject() {
+import styles from "./previous.module.css";
+import { projectImages } from "@/data/projects";
 
-
-  const fallbackImages = [
-    { url: "/current-project-images/1.jpg", name: "Cotswold way external right" },
-    { url: "/current-project-images/2.jpg", name: "Cotswold way external left" },
-    { url: "/current-project-images/3.jpg", name: "Cotswold way bathroom left" },
-    { url: "/current-project-images/4.jpg", name: "Cotswold way bathroom right" }
-  ];
+export default function PreviousProject({ images = projectImages }) {
 
   return (
     <div className={styles.gallery}>
-      {fallbackImages.map((image, i) => (
+      {images.map((image, i) => (
         <div className={styles.item} key={`${image.name}-${i}`}>
           <Image
             src={image.url}
             alt={`Previous loft conversion / extension project photo ${i + 1}`}
             fill
-            sizes="100vw"
+            sizes="(max-width: 800px) 100vw, 25vw"
             quality={90}
+            loading="lazy"
           />
         </div>
       ))}
