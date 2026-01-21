@@ -27,7 +27,7 @@ export default function Services() {
           practical living areas. From first sketches to final finishes, our
           expert team delivers loft conversions, side extensions, GRP flat roof
           installations, and structural steel work across London. With decades
-          of construction and project-management experience, we're fully insured
+          of construction and project-management experience, we&apos;re fully insured
           and back our craftsmanship with a 10-year structural warranty - so your
           investment is protected.
         </p>

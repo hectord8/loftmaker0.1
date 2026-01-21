@@ -9,10 +9,19 @@ body {
   --foreground: #111111;
   --text-primary: #1a1a1a;
   --text-secondary: #3a3a3a;
-}
-
-li{
-  list-style: none;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 48px;
+  --space-6: 64px;
+  --space-7: 80px;
+  --space-8: 120px;
+  --text-1: 16px;
+  --text-2: 18px;
+  --text-3: 24px;
+  --text-4: 32px;
+  --text-5: 40px;
 }
 
 address {
@@ -37,82 +46,10 @@ a {
   text-decoration: none;
 }
 
-
-header{
-  position: fixed;
-  width: 90%;
-  top: 1rem;
-  justify-self: center;
-  align-items: center;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-}
-
-footer{
-  padding: clamp(24px, 6vw, 64px) 0;
-}
-
-.top{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: clamp(16px, 3vw, 32px);
-  width: min(1200px, 90vw);
-  margin: 0 auto clamp(16px, 4vw, 40px);
-  font-size: 20px;
-}
-
-.top div{
-  padding: 1rem;
-  border-left: 2px grey solid;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.top li{
-  padding: 6px 0;
-}
-
-.top p{
-  padding: 0;
-}
-
-.bottom{
-  width: min(1200px, 90vw);
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.display{
-  display: block;
-}
-
-@media (max-width: 768px) {
-  .display{
-    display: none;
-  }
-
-  header{
-    justify-content: right;
-  }
-
-  .top{
-    font-size: 18px;
-  }
-
-  .top div{
-    border-left: none;
-    border-top: 2px grey solid;
-  }
-
-  .bottom{
-    flex-direction: column;
-    text-align: center;
-  }
-  
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #111111;
+  outline-offset: 2px;
 }
 @media (prefers-color-scheme: dark) {
   html {

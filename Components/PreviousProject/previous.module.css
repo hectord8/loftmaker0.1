@@ -1,15 +1,14 @@
 .gallery {
-    height: 60vh;
+  height: clamp(320px, 60vh, 640px);
   display: flex;
-
-  gap: 8px;
+  gap: var(--space-1);
 }
 
 @media (max-width: 800px){
-    .gallery{
-          flex-direction: column;
-          margin-left: 0vw;
-    }
+  .gallery{
+    flex-direction: column;
+    margin: 0;
+  }
 }
 
 

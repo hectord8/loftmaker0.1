@@ -1,0 +1,102 @@
+.skipLink {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  background: #ffffff;
+  color: #111111;
+  border: 2px solid #111111;
+  padding: var(--space-1) var(--space-2);
+  z-index: 20;
+}
+
+.skipLink:focus {
+  left: var(--space-2);
+  top: var(--space-2);
+  width: auto;
+  height: auto;
+}
+
+.header {
+  position: fixed;
+  width: 90%;
+  top: var(--space-2);
+  justify-self: center;
+  align-items: center;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer {
+  padding: clamp(var(--space-3), 6vw, var(--space-6)) 0;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: clamp(var(--space-2), 3vw, var(--space-4));
+  width: min(1400px, 94vw);
+  margin: 0 auto clamp(var(--space-2), 4vw, var(--space-5));
+  font-size: var(--text-2);
+}
+
+.column {
+  padding: var(--space-2);
+  border-left: 2px grey solid;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.top ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top li {
+  padding: 6px 0;
+}
+
+.top p {
+  padding: 0;
+}
+
+.bottom {
+  width: min(1400px, 94vw);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.display {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .display {
+    display: none;
+  }
+
+  .header {
+    justify-content: right;
+  }
+
+  .top {
+    font-size: var(--text-1);
+  }
+
+  .column {
+    border-left: none;
+    border-top: 2px grey solid;
+  }
+
+  .bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}
