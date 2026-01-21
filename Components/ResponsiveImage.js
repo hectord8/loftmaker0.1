@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import styles from "../app/page.module.css"
 export default function ResponsiveImage({large , medium, small }) {
   return (
     <picture>
@@ -7,12 +7,14 @@ export default function ResponsiveImage({large , medium, small }) {
       <source media="(max-width: 1024px)" srcSet={medium} />
     
       <Image
+        className={styles.image}
         src={large}
         alt="Hero"
         fill
         sizes="100vw"
-        style={{ objectFit: 'fill' }} 
+        style={{ objectFit: 'cover' }} 
       />
+
     </picture>
   );
 }

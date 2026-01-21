@@ -30,6 +30,17 @@ export default function RootLayout({ children }) {
             />
         </header>
         {children}
+        <footer >
+            <div>
+              <div>
+                contact
+              </div>
+              <div>
+                office hours
+              </div>
+              <div>Loft Maker London</div>
+            </div>
+        </footer>
       </body>
     </html>
   );

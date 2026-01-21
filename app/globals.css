@@ -47,6 +47,11 @@ header{
   justify-content: space-between;
 }
 
+footer{
+  height: 30vh;
+  background-color: red;
+}
+
 .display{
   display: block;
 }
