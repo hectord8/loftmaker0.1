@@ -10,7 +10,7 @@ const postQuery = `*[_type in ["post", "posts", "content"] && (slug.current == $
   "summary": coalesce(summary, excerpt, description),
   "image": coalesce(coverImage, mainImage, image)
 }`;
-
+export const revalidate = 60; 
 export default async function PostPage({ params }) {
   const resolvedParams = await Promise.resolve(params);
   const rawSlug = resolvedParams?.slug;

@@ -15,7 +15,7 @@ const postsQuery = `*[_type in ["post", "posts", "content"]] | order(_createdAt 
   "slug": coalesce(slug.current, slug),
   "image": coalesce(coverImage, mainImage, image)
 }`;
-
+export const revalidate = 60; 
 export default async function Home() {
   
   const posts = await sanityClient.fetch(postsQuery);
