@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 import { services } from "@/data/services";
-import styles from "../app/page.module.css";
+import styles from "../app/(site)/page.module.css";
 import useInView from "@/Components/useInView";
 
-export default function Services() {
+export default function Services({ projects = [] }) {
   const { ref, isVisible } = useInView();
 
   return (
@@ -39,6 +39,19 @@ export default function Services() {
           and back our craftsmanship with a 10-year structural warranty - so your
           investment is protected.
         </p>
+        {projects.length > 0 ? (
+          <div className={styles.projectList}>
+            <h3 className={styles.projectHeading}>Recent Projects</h3>
+            <ul>
+              {projects.map((project) => (
+                <li key={project._id} className={styles.projectItem}>
+                  <h4>{project.title}</h4>
+                  {project.summary ? <p>{project.summary}</p> : null}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
 
       <div

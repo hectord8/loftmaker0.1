@@ -1,5 +1,5 @@
 import ResponsiveImage from "@/Components/ResponsiveImage";
-import styles from "../app/page.module.css";
+import styles from "../app/(site)/page.module.css";
 
 export default function Hero() {
   return (

@@ -1,7 +1,7 @@
 "use client";
 
 import PreviousProject from "@/Components/PreviousProject/PreviousProject";
-import styles from "../app/page.module.css";
+import styles from "../app/(site)/page.module.css";
 import useInView from "@/Components/useInView";
 
 export default function PreviousProjectsSection() {

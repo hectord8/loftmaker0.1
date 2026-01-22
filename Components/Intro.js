@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "../app/page.module.css";
+import styles from "../app/(site)/page.module.css";
 import useInView from "@/Components/useInView";
 
 export default function Intro() {
