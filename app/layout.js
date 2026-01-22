@@ -1,4 +1,4 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import Image from "next/image";
 import "./globals.css";
 import styles from "./layout.module.css";
@@ -12,6 +12,12 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  weight: ["400", "500"],
 });
 
 export const metadata = {
@@ -52,7 +58,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable}`}
+      >
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -87,7 +95,9 @@ export default function RootLayout({ children }) {
           Skip to content
         </a>
         <header className={styles.header}>
-          <h1 className={styles.display}>{site.name}</h1>
+          <h1 className={`${styles.display} ${styles.wordmark}`}>
+            {site.name}
+          </h1>
           <Image
             src="/logo.png"
             width={120}
