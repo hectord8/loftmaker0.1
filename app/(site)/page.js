@@ -65,7 +65,7 @@ export default async function Home() {
                   {post.summary ? (
                     <p className={styles.postSummary}>{post.summary}</p>
                   ) : null}
-                  {post.slug ? <span>{post.slug}</span> : null}
+                  {post.slug ? <span>More Information -</span> : null}
                 </Link>
               </li>
             ))}
