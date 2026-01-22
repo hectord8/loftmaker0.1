@@ -3,7 +3,10 @@ import styles from "../app/page.module.css";
 
 export default function Hero() {
   return (
-    <div className={styles.mainImage} aria-label="Loft conversion hero image">
+    <div
+      className={`${styles.mainImage} ${styles.heroReveal}`}
+      aria-label="Loft conversion hero image"
+    >
       <ResponsiveImage
         large="/Main_Images/35.jpg"
         medium="/Main_Images/External-surrey.jpg"

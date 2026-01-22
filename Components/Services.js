@@ -1,15 +1,23 @@
+"use client";
+
 import Image from "next/image";
 import { services } from "@/data/services";
 import styles from "../app/page.module.css";
+import useInView from "@/Components/useInView";
 
 export default function Services() {
+  const { ref, isVisible } = useInView();
+
   return (
     <section
-      className={styles.sections}
+      ref={ref}
+      className={`${styles.sections} ${styles.reveal} ${
+        isVisible ? styles.isVisible : ""
+      }`}
       id="services"
       aria-labelledby="services-heading"
     >
-      <div className={styles.sectionimg}>
+      <div className={`${styles.sectionimg} ${styles.servicesImage}`}>
         <Image
           src="/random-jobs/IMG_3197.jpeg"
           alt="Loft conversion interior finish"
@@ -20,7 +28,7 @@ export default function Services() {
         />
       </div>
 
-      <div className={styles.whatwedo}>
+      <div className={`${styles.whatwedo} ${styles.servicesCopy}`}>
         <h2 id="services-heading">What We Do</h2>
         <p>
           At Loft Makers London Ltd, we turn unused space into beautiful,
@@ -33,10 +41,15 @@ export default function Services() {
         </p>
       </div>
 
-      <div>
+      <div
+        className={`${styles.stagger} ${isVisible ? styles.isVisible : ""}`}
+      >
         <ul>
-          {services.map((service) => (
-            <li key={service.title}>
+          {services.map((service, index) => (
+            <li
+              key={service.title}
+              style={{ "--delay": `${index * 80}ms` }}
+            >
               <h4>{service.title}</h4>
               <p>{service.description}</p>
             </li>

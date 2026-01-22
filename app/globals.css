@@ -2,6 +2,7 @@
 html,
 body {
   max-width: 100%;
+  overflow-x: hidden;
 }
 
 :root {
@@ -9,6 +10,10 @@ body {
   --foreground: #111111;
   --text-primary: #1a1a1a;
   --text-secondary: #3a3a3a;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 300ms;
+  --dur-2: 600ms;
+  --dur-3: 1200ms;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;

@@ -42,18 +42,7 @@
 
 
 
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  a.primary:hover {
-    background: var(--button-primary-hover);
-    border-color: transparent;
-  }
 
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
-    border-color: transparent;
-  }
-}
 
 @media (max-width: 600px) {
   .main {
@@ -81,6 +70,82 @@
 
 .image {
   object-fit: cover;
+  animation: slowZoom 12s ease-out forwards;
+  transform-origin: center;
+}
+
+.heroReveal {
+  animation: fadeUp var(--dur-2) var(--ease-out) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+}
+
+.reveal.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger > *,
+.stagger li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+  transition-delay: var(--delay, 0ms);
+}
+
+.stagger.isVisible > *,
+.stagger.isVisible li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image,
+  .heroReveal {
+    animation: none;
+  }
+
+  .reveal,
+  .reveal.isVisible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .stagger > *,
+  .stagger li,
+  .stagger.isVisible > *,
+  .stagger.isVisible li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .PreviousProject{
@@ -125,6 +190,7 @@
 .sections h2{
   border-bottom: solid black 2px;
   width: fit-content;
+  margin-bottom: 2rem;
   padding-right: var(--space-5);
   font-size: clamp(var(--text-3), 3vw, var(--text-4));
 }
@@ -198,6 +264,15 @@
   "b"
   "c";
 }
+  .sections ul{
+  grid-template-columns: 1fr;
+  }
+  .servicesCopy {
+    order: 0;
+  }
+  .servicesImage {
+    order: 1;
+  }
   .hidden{ /* RANDOM */ 
     display: none;
   }
