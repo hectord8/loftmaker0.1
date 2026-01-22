@@ -4,6 +4,7 @@ import PreviousProjectsSection from "@/Components/PreviousProjectsSection";
 import Services from "@/Components/Services";
 import { sanityClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+import Link from "next/link";
 
 
 
@@ -48,19 +49,24 @@ export default async function Home() {
           <ul className={styles.postsList}>
             {posts.map((post) => (
               <li key={post._id} className={styles.postCard}>
-                {post.image ? (
-                  <img
-                    className={styles.postImage}
-                    src={urlFor(post.image).width(720).height(480).fit("crop").url()}
-                    alt={post.title || "Post image"}
-                    loading="lazy"
-                  />
-                ) : null}
-                <h3>{post.title || "Untitled"}</h3>
-                {post.summary ? (
-                  <p className={styles.postSummary}>{post.summary}</p>
-                ) : null}
-                {post.slug ? <span>{post.slug}</span> : null}
+                <Link
+                  className={styles.postLink}
+                  href={post.slug ? `/posts/${post.slug.replace(/^\/+/, "")}` : "#"}
+                >
+                  {post.image ? (
+                    <img
+                      className={styles.postImage}
+                      src={urlFor(post.image).width(720).height(480).fit("crop").url()}
+                      alt={post.title || "Post image"}
+                      loading="lazy"
+                    />
+                  ) : null}
+                  <h3>{post.title || "Untitled"}</h3>
+                  {post.summary ? (
+                    <p className={styles.postSummary}>{post.summary}</p>
+                  ) : null}
+                  {post.slug ? <span>{post.slug}</span> : null}
+                </Link>
               </li>
             ))}
           </ul>
