@@ -91,7 +91,7 @@ async function main() {
 
   const doc = {
     _type: "gallery",
-    title: "cotswold way",
+    title: "Gallery",
     images: galleryImages,
   };
 
