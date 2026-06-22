@@ -2,11 +2,18 @@
   width: min(1400px, 92vw);
   margin: 0 auto;
   padding: clamp(var(--space-4), 6vh, var(--space-8)) 0;
+  display: grid;
+  gap: clamp(var(--space-5), 6vh, var(--space-9));
+}
+
+.section {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: 5%;
 }
 
 .title {
   font-size: clamp(var(--text-3), 3vw, var(--text-5));
-  margin-bottom: clamp(var(--space-3), 4vh, var(--space-6));
   border-bottom: 2px solid #111;
   width: fit-content;
   padding-right: var(--space-5);
@@ -20,7 +27,7 @@
 
 .card {
   border: 1px solid #111;
-  border-radius: 6px;
+  border-radius: 2px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.6);
 }

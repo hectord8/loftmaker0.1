@@ -40,8 +40,9 @@ export default async function Home() {
         <h3>Contact us today to schedule a free initial consultation.</h3>
       </section>
       <PreviousProjectsSection />
-      <GalleryPreview />
+      
       <Services />
+      <GalleryPreview />
       {posts.length > 0 ? (
         <section className={styles.postsSection} aria-labelledby="posts-heading">
           <div className={styles.postsHeader}>
@@ -75,5 +76,6 @@ export default async function Home() {
         </section>
       ) : null}
     </div>
+    
   );
 }
