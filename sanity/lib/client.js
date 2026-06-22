@@ -11,3 +11,5 @@ export const sanityClient = createClient({
   apiVersion,
   useCdn: false,
 });
+
+

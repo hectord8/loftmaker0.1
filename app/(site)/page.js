@@ -2,6 +2,7 @@ import styles from "./page.module.css";
 import Hero from "@/Components/Hero";
 import PreviousProjectsSection from "@/Components/PreviousProjectsSection";
 import Services from "@/Components/Services";
+import GalleryPreview from "@/Components/GalleryPreview";
 import { sanityClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
@@ -39,6 +40,7 @@ export default async function Home() {
         <h3>Contact us today to schedule a free initial consultation.</h3>
       </section>
       <PreviousProjectsSection />
+      <GalleryPreview />
       <Services />
       {posts.length > 0 ? (
         <section className={styles.postsSection} aria-labelledby="posts-heading">

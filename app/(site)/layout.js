@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./layout.module.css";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -89,17 +90,21 @@ export default function SiteLayout({ children }) {
           }),
         }}
       />
-      <a className={styles.skipLink} href="#main-content">
-        Skip to content
-      </a>
+      
       <header className={styles.header}>
-        <h1 className={`${styles.display} ${styles.wordmark}`}>{site.name}</h1>
+        <Link href="/">
+         <h1 className={`${styles.display} ${styles.wordmark}`}>{site.name}</h1>
+        </Link>
+        
+        <Link href="/">
         <Image
           src="/logo.png"
           width={120}
           height={120}
           alt={`${site.name} logo`}
         />
+        </Link>
+        
       </header>
       <main id="main-content">{children}</main>
       <footer className={styles.footer}>
