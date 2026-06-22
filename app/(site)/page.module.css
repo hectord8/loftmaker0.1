@@ -291,12 +291,8 @@
 
 /* SECTIONS  */
 .sections{
-
-
-
-
   display: grid;
-  width: min(1200px, 90vw);
+  width: min(1200px, 92vw);
   margin: clamp(var(--space-4), 5vw, var(--space-7)) auto;
   gap: clamp(var(--space-3), 6vw, var(--space-7));
   row-gap: clamp(var(--space-2), 3vw, var(--space-5));
@@ -412,26 +408,22 @@
 
 @media (max-width: 1600px) {
   .sections{
-   margin-bottom: 10%;
-  width: 90vw;
-  margin-top: 10%;
-  margin-left: 3vw;
-  grid-template-areas:
-  "a b "
-  "c c"
-  ;
-}
+    width: min(1200px, 92vw);
+    margin: 10% auto;
+    grid-template-areas:
+    "a b "
+    "c c"
+    ;
+  }
 
   .sections:nth-child(2){
-   margin-bottom: 20%;
-  width: 90vw;
-  margin-top: 0%;
-  margin-left: 3vw;
-  grid-template-areas:
-  "a b "
-  "c c"
-  ;
-}
+    width: min(1200px, 92vw);
+    margin: 0 auto 20%;
+    grid-template-areas:
+    "a b "
+    "c c"
+    ;
+  }
 }
 @media (max-width: 1200px) {
   .sections{
