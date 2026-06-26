@@ -5,6 +5,7 @@ import styles from "./layout.module.css";
 import { services } from "@/data/services";
 import { site } from "@/data/site";
 import Link from "next/link";
+import CallButton from "@/Components/CallButton/CallButton";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -114,7 +115,7 @@ export default function SiteLayout({ children }) {
             <address>
               <ul>
                 <li>Craig Darrach</li>
-                <li>{site.email}</li>
+                <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
                 <li>{site.phone}</li>
                 <li>
                   <a href={site.instagram}>@Loft Maker</a>
@@ -148,6 +149,7 @@ export default function SiteLayout({ children }) {
           <p>Website made by Hector Darrach</p>
         </div>
       </footer>
+      <CallButton />
     </div>
   );
 }
