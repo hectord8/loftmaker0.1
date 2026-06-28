@@ -146,7 +146,7 @@ export default function SiteLayout({ children }) {
             height={120}
             alt="Loft Maker London logo"
           />
-          <p>Website made by Hector Darrach</p>
+
         </div>
       </footer>
       <CallButton />

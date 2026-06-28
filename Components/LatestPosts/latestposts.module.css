@@ -1,0 +1,132 @@
+.timeline {
+  width: min(1200px, 92vw);
+  margin: 0 auto clamp(var(--space-5), 12vh, var(--space-8));
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--dur-2) var(--ease-out),
+    transform var(--dur-2) var(--ease-out);
+
+}
+
+.timeline.isVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.header {
+  margin-bottom: var(--space-4);
+}
+
+.header h2 {
+  font-size: clamp(var(--text-3), 3vw, var(--text-4));
+  border-bottom: 2px solid #111;
+  width: fit-content;
+  padding-right: var(--space-5);
+  margin-bottom: var(--space-1);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: var(--text-2);
+}
+
+.entries {
+  margin-left: 3%;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  padding-bottom: var(--space-3);
+}
+
+.entries::-webkit-scrollbar {
+  height: 6px;
+}
+
+.entries::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 999px;
+}
+
+.entry {
+  min-width: 100%;
+  scroll-snap-align: start;
+  height: 768px;
+  display: flex;
+  padding-right: var(--space-3);
+}
+
+.content {
+  border: 1px solid #111;
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  overflow: hidden;
+}
+
+.date {
+  display: block;
+  font-size: var(--text-1);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.image {
+  width: 100%;
+  flex: 7;
+  object-fit: cover;
+  background: rgba(0, 0, 0, 0.06);
+  min-height: 0;
+}
+
+.body {
+  flex: 3;
+  display: grid;
+  gap: var(--space-1);
+  min-height: 0;
+}
+
+.title {
+  font-size: clamp(var(--text-3), 2.4vw, var(--text-4));
+}
+
+.summary {
+  color: var(--text-secondary);
+  font-size: var(--text-2);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.link {
+  font-size: var(--text-1);
+  color: var(--text-primary);
+  font-weight: 500;
+  justify-self: start;
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .image {
+    height: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline,
+  .timeline.isVisible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
