@@ -15,7 +15,7 @@ export default async function GalleryPreview() {
 
   return (
     <section className={styles.galleryPreview}>
-      <h2>Gallery</h2>
+      <h2>Projects</h2>
       <div className={styles.galleryGrid}>
         {images.map((img) => (
           <Link key={img._key} href="/gallery" className={styles.galleryCard}>
@@ -31,6 +31,7 @@ export default async function GalleryPreview() {
           </Link>
         ))}
       </div>
+      <Link href="/gallery" className={styles.seeMore}>See More</Link>
     </section>
   );
 }

@@ -370,6 +370,24 @@
   }
 }
 
+.seeMore {
+  display: block;
+  width: fit-content;
+  margin: var(--space-4) auto 0;
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid #111;
+  border-radius: 4px;
+  color: #111;
+  font-size: var(--text-2);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.seeMore:hover {
+  background: #111;
+  color: #fff;
+}
+
 .sections div:nth-child(1){
   grid-area: a;
 }
