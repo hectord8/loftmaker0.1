@@ -31,13 +31,12 @@ export default function Services({ projects = [] }) {
       <div className={`${styles.whatwedo} ${styles.servicesCopy}`}>
         <h2 id="services-heading">What We Do</h2>
         <p>
-          At Loft Makers London Ltd, we turn unused space into beautiful,
-          practical living areas. From first sketches to final finishes, our
-          expert team delivers loft conversions, side extensions, GRP flat roof
-          installations, and structural steel work across London. With decades
-          of construction and project-management experience, we&apos;re fully insured
-          and back our craftsmanship with a 10-year structural warranty - so your
-          investment is protected.
+          At Loft Maker London, we believe every property has untapped potential. Whether it&apos;s a side return, a rear extension, an unused outbuilding,
+           or a full structural overhaul, we specialise in bringing spaces to life — creating homes that work harder for the people who live in them.
+          From the moment you get in touch, we take care of everything. Our in-house team handles the full journey: design and planning, structural engineering, 
+          roofing, steelwork, groundworks, and all the finishing touches that make a house feel like a home. One team, one point of contact, zero hassle.
+          Every project we deliver is backed by a 10-year structural warranty — because we build things to last, and we stand behind every job we do. 
+          We don't cut corners and we don't settle for anything less than work we're genuinely proud of.
         </p>
         {projects.length > 0 ? (
           <div className={styles.projectList}>

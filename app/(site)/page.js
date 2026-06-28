@@ -27,17 +27,16 @@ export default async function Home() {
       <section className={styles.intro} aria-labelledby="intro-heading">
         <h2 id="intro-heading">Complex Problems, innovative solutions</h2>
         <p>
-          From start to finish, we ensure that your loft conversion in the London
-          area meets your desired requirements. With a focus on exceptional
-          service and a high-quality finish, we take pride in our workmanship. We
-          offer a range of loft conversion options to suit any lifestyle and
-          budget, recognizing that every home is unique. Whether you&apos;re looking
-          for a simple conversion or a more complex project, our skilled team can
-          bring your ideas to life. Our commitment to quality and customization
-          guarantees a loft conversion or extension that is truly personalized
-          for you.
+          From start to finish, we make sure your home renovation London project
+          delivers what you need. We do loft conversions, extensions, and full
+          home renovations across London and Essex — from Chingford to South
+          Woodford. Every job gets the same straightforward approach: clear
+          pricing, honest timelines, and work we&apos;re happy to stand behind.
+          Whether it&apos;s a simple conversion or something more involved, we&apos;ll
+          talk through your options and find what works for your home and your
+          budget.
         </p>
-        <h3>Contact us today to schedule a free initial consultation.</h3>
+        <h3>Get in touch for a free, no-obligation consultation.</h3>
       </section>
       <PreviousProjectsSection />
       

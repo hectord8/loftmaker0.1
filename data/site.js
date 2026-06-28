@@ -2,7 +2,7 @@ export const site = {
   name: "Loft Maker London",
   url: "https://www.lmlbuild.uk/",
   description:
-    "Loft conversions, extensions, and structural work across the London area.",
+    "Home renovation London — loft conversions, extensions, and structural steelwork across London and Essex. Free consultations available.",
   keywords: [
     "loft conversions",
     "loft conversion London",

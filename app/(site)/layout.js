@@ -134,8 +134,8 @@ export default function SiteLayout({ children }) {
           <div className={styles.column}>
             <h3>Loft Maker London</h3>
             <p>
-              High quality, reliable, personal contracting and construction
-              services throughout the London and wider Essex region.
+              Reliable construction services London homeowners count on.
+              No-nonsense contracting across London and Essex.
             </p>
           </div>
         </div>
