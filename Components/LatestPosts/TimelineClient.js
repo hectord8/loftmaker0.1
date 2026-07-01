@@ -33,9 +33,6 @@ export default function TimelineClient({ posts }) {
         {posts.map((post) => (
           <article key={post._id} className={styles.entry}>
             <div className={styles.content}>
-              <time className={styles.date}>
-                {post._createdAt ? formatDate(post._createdAt) : null}
-              </time>
               {post.image ? (
                 <img
                   className={styles.image}
@@ -45,6 +42,9 @@ export default function TimelineClient({ posts }) {
                 />
               ) : null}
               <div className={styles.body}>
+                <time className={styles.date}>
+                  {post._createdAt ? formatDate(post._createdAt) : null}
+                </time>
                 <h3 className={styles.title}>
                   {post.title || "Untitled update"}
                 </h3>

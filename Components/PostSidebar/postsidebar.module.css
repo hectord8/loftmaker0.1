@@ -1,0 +1,104 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.section {
+  border: 1px solid #111;
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.sectionTitle {
+  font-size: var(--text-1);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-1);
+  border-bottom: 1px solid #111;
+}
+
+.toc {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.tocItem {
+  font-size: var(--text-1);
+  line-height: 1.4;
+}
+
+.tocItem.l3 {
+  padding-left: var(--space-2);
+  font-size: 14px;
+}
+
+.tocItem a {
+  display: block;
+  padding: 3px 0;
+  border-left: 2px solid transparent;
+  padding-left: var(--space-1);
+  transition: border-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out);
+}
+
+.tocItem.isActive a {
+  border-left-color: #E87A2A;
+  color: #E87A2A;
+}
+
+.tocItem a:hover {
+  opacity: 0.6;
+}
+
+.monthGroup {
+  margin-bottom: var(--space-2);
+}
+
+.monthGroup:last-child {
+  margin-bottom: 0;
+}
+
+.monthLabel {
+  font-size: var(--text-1);
+  font-weight: 600;
+  margin-bottom: var(--space-1);
+}
+
+.archiveList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.archiveLink {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-1);
+  border: 1px solid transparent;
+  border-radius: 2px;
+  transition: border-color var(--dur-1) var(--ease-out),
+    background var(--dur-1) var(--ease-out);
+}
+
+.archiveLink:hover {
+  border-color: #111;
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.archiveDate {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+}
+
+.archiveTitle {
+  font-size: 14px;
+  font-weight: 500;
+}

@@ -1,5 +1,5 @@
 .timeline {
-  width: min(1200px, 92vw);
+  width: min(960px, 92vw);
   margin: 0 auto clamp(var(--space-5), 12vh, var(--space-8));
   opacity: 0;
   transform: translateY(12px);
@@ -51,14 +51,12 @@
 .entry {
   min-width: 100%;
   scroll-snap-align: start;
-  height: 768px;
   display: flex;
   padding-right: var(--space-3);
 }
 
 .content {
   border: 1px solid #111;
-  padding: var(--space-3);
   background: rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: column;
@@ -77,17 +75,16 @@
 
 .image {
   width: 100%;
-  flex: 7;
+  display: block;
   object-fit: cover;
   background: rgba(0, 0, 0, 0.06);
-  min-height: 0;
 }
 
 .body {
-  flex: 3;
+  padding: var(--space-3);
   display: grid;
   gap: var(--space-1);
-  min-height: 0;
+  text-align: left;
 }
 
 .title {
