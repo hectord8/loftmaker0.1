@@ -1,5 +1,6 @@
 import "./globals.css";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 export default function RootLayout({ children }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
           </>
         )}
         {children}
+        <Analytics />
       </body>
     </html>
   );
