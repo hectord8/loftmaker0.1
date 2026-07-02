@@ -3,7 +3,7 @@ import Hero from "@/Components/Hero";
 import PreviousProjectsSection from "@/Components/PreviousProjectsSection";
 import Services from "@/Components/Services";
 import GalleryPreview from "@/Components/GalleryPreview";
-import LatestPosts from "@/Components/LatestPosts/LatestPosts";
+// import LatestPosts from "@/Components/LatestPosts/LatestPosts";
 
 export default async function Home() {
   return (
@@ -26,7 +26,7 @@ export default async function Home() {
       <PreviousProjectsSection />
       <Services />
       <GalleryPreview />
-      <LatestPosts />
+      {/* <LatestPosts /> */}
     </div>
   );
 }

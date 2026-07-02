@@ -100,7 +100,7 @@
 .mainImage{
   position: relative;
   width: 100%;
-  height: clamp(360px, 85vh, 720px);
+  height: 100dvh;
   margin-bottom: clamp(var(--space-3), 6vw, var(--space-6));
 }
 
