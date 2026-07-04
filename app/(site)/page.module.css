@@ -322,11 +322,14 @@
 }
 
 .sections li{
-
   padding: var(--space-3);
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 4px;
- 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sections li h4{
+  font-family: var(--font-oswald);
 }
 
 .sectionimg{

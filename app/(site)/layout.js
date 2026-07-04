@@ -6,6 +6,7 @@ import { services } from "@/data/services";
 import { site } from "@/data/site";
 import Link from "next/link";
 import CallButton from "@/Components/CallButton/CallButton";
+import HeaderTitle from "@/Components/HeaderTitle/HeaderTitle";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -94,7 +95,7 @@ export default function SiteLayout({ children }) {
       
       <header className={styles.header}>
         <Link href="/">
-         <h1 className={`${styles.display} ${styles.wordmark}`}>{site.name}</h1>
+         <HeaderTitle className={`${styles.display} ${styles.wordmark}`}>{site.name}</HeaderTitle>
         </Link>
         
         <Link href="/">
