@@ -68,7 +68,6 @@
 .date {
   display: block;
   font-size: var(--text-1);
-  font-weight: 600;
   color: var(--text-primary);
   flex-shrink: 0;
 }
@@ -104,7 +103,6 @@
 .link {
   font-size: var(--text-1);
   color: var(--text-primary);
-  font-weight: 500;
   justify-self: start;
   transition: opacity 0.2s;
 }

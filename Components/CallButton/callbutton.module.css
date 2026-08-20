@@ -30,7 +30,7 @@
   transition: max-width var(--dur-2) var(--ease-out),
               max-height var(--dur-2) var(--ease-out),
               border-radius var(--dur-2) var(--ease-out);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-google-sans-flex);
 }
 
 .link {
@@ -68,8 +68,8 @@
 }
 
 .linkLabel {
-  font-size: 17px;
-  font-weight: 500;
+  font-family: var(--font-google-sans-flex);
+  font-size: 18px;
   white-space: nowrap;
 }
 

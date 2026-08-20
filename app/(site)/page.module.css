@@ -14,7 +14,6 @@
 
 .intro h2 {
   font-size: var(--text-5);
-  font-weight: 600;
 
   letter-spacing: -2.4px;
  
@@ -31,12 +30,16 @@
 
 .intro h3 {
   font-size: var(--text-2);
-  font-weight: 500;
   color: var(--text-primary);
 }
 
+.introAction {
+  align-self: center;
+  margin-top: var(--space-2);
+}
+
+
 .intro a {
-  font-weight: 500;
   color: var(--text-primary);
 }
 
@@ -56,7 +59,6 @@
 
 .projectHeading {
   font-size: var(--text-2);
-  font-weight: 600;
   color: var(--text-primary);
 }
 
@@ -104,9 +106,46 @@
   margin-bottom: clamp(var(--space-3), 6vw, var(--space-6));
 }
 
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: clamp(var(--space-4), 8vw, var(--space-8));
+  color: #fff;
+  background: linear-gradient(90deg, rgba(0, 0, 0, .68), rgba(0, 0, 0, .08) 75%);
+}
+
+.heroBrand {
+  position: absolute;
+  top: clamp(var(--space-4), 8vw, var(--space-8));
+  left: clamp(var(--space-3), 8vw, var(--space-8));
+  z-index: 1;
+  color: #fff;
+  font-family: var(--font-google-sans-flex);
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: opacity var(--motion-standard) var(--ease-out), transform var(--motion-standard) var(--ease-out);
+}
+
+.heroBrandHidden { opacity: 0; transform: translateY(-12px); pointer-events: none; }
+
+.heroEyebrow { max-width: 650px; font-size: var(--text-1); }
+.heroOverlay h1 { max-width: 760px; font-size: clamp(42px, 7vw, 86px); line-height: .98; letter-spacing: -2px; }
+.heroCopy { max-width: 620px; font-size: clamp(18px, 2vw, 24px); line-height: 1.4; }
+.heroActions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.heroItem { opacity: 0; transform: translateY(14px); animation: heroContentIn var(--motion-standard) var(--ease-out) forwards; }
+.heroEyebrow { animation-delay: 300ms; }
+.heroOverlay h1 { animation-delay: 500ms; }
+.heroCopy { animation-delay: 750ms; }
+.heroActions { animation-delay: 1000ms; }
+
 .image {
   object-fit: cover;
-  animation: slowZoom 12s ease-out forwards;
+  animation: slowZoom 18s ease-out forwards;
   transform-origin: center;
 }
 
@@ -152,6 +191,11 @@
   }
 }
 
+@keyframes heroContentIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes slowZoom {
   from {
     transform: scale(1.02);
@@ -182,6 +226,18 @@
     transform: none;
     transition: none;
   }
+
+  .heroItem,
+  .motionReveal,
+  .motionReveal.motionVisible {
+    opacity: 1;
+    transform: none;
+    animation: none;
+    transition: none;
+  }
+
+  .heroBrand { opacity: 1; transform: none; transition: none; }
+  .heroBrandHidden { opacity: 0; transform: none; transition: none; }
 }
 
 .PreviousProject{
@@ -231,6 +287,22 @@
   margin: 0 auto clamp(var(--space-5), 12vh, var(--space-8));
 }
 
+.contactSection {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(var(--space-4), 7vw, var(--space-8));
+  width: min(1200px, 92vw);
+  margin: 0 auto clamp(var(--space-6), 12vh, var(--space-8));
+  padding: clamp(var(--space-4), 6vw, var(--space-7));
+  background: #d4d4d4;
+}
+.contactSection[data-motion-visible="true"] .form,
+.contactSection[data-motion-visible="true"] > div { animation: heroContentIn var(--motion-standard) var(--ease-out) both; }
+.contactSection[data-motion-visible="true"] .form { animation-delay: 140ms; }
+.contactSection h2 { margin-bottom: var(--space-2); font-size: clamp(var(--text-3), 4vw, var(--text-5)); line-height: 1.05; }
+.contactSection p { color: var(--text-secondary); line-height: 1.6; }
+.contactEyebrow { margin-bottom: var(--space-2); color: #a94700 !important; }
+
 .galleryPreview h2 {
   font-size: clamp(var(--text-3), 3vw, var(--text-4));
   border-bottom: 2px solid #111;
@@ -252,14 +324,20 @@
   overflow: hidden;
   background: rgba(255, 255, 255, 0.6);
   display: block;
+  transition: transform var(--motion-fast) var(--ease-out), box-shadow var(--motion-fast) ease;
 }
+
+.galleryCard:hover, .galleryCard:focus-visible { transform: translateY(-4px); box-shadow: 0 6px 18px rgba(0, 0, 0, .16); }
 
 .galleryImage {
   width: 100%;
   height: 260px;
   object-fit: cover;
   display: block;
+  transition: transform var(--motion-slow) var(--ease-out), filter var(--motion-fast) ease;
 }
+
+.galleryCard:hover .galleryImage, .galleryCard:focus-visible .galleryImage { transform: scale(1.03); filter: saturate(1.08); }
 
 .galleryCaption {
   position: absolute;
@@ -278,28 +356,36 @@
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .contactSection[data-motion-visible="true"] .form,
+  .contactSection[data-motion-visible="true"] > div { animation: none; }
+  .galleryCard,
+  .galleryImage,
+  .sections li { transition: none; }
+}
+
 @media (max-width: 500px) {
   .galleryGrid {
     grid-template-columns: 1fr;
   }
 }
 
+@media (max-width: 800px) {
+  .contactSection { grid-template-columns: 1fr; }
+  .heroOverlay { padding: var(--space-3); padding-bottom: var(--space-5); background: linear-gradient(0deg, rgba(0, 0, 0, .75), rgba(0, 0, 0, .08) 80%); }
+  .heroOverlay h1 { letter-spacing: -1px; }
+}
+
 .seeMore {
   display: block;
   width: fit-content;
   margin: var(--space-4) auto 0;
-  padding: var(--space-2) var(--space-5);
-  border: 1px solid #111;
-  border-radius: 4px;
-  color: #111;
-  font-size: var(--text-2);
-  text-decoration: none;
-  transition: background 0.2s, color 0.2s;
 }
 
-.seeMore:hover {
-  background: #111;
-  color: #fff;
+@media (prefers-reduced-motion: reduce) {
+  .galleryCard,
+  .galleryImage,
+  .sections li { transition: none; }
 }
 
 .sections div:nth-child(1){
@@ -326,10 +412,13 @@
   border: 1px solid black;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform var(--motion-fast) var(--ease-out), background var(--motion-fast) ease, box-shadow var(--motion-fast) ease;
 }
 
+.sections li:hover { transform: translateY(-4px); background: #f0f0f0; box-shadow: 0 6px 18px rgba(0, 0, 0, .14); }
+
 .sections li h4{
-  font-family: var(--font-oswald);
+  font-family: var(--font-google-sans-flex);
 }
 
 .sectionimg{

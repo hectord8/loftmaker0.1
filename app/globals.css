@@ -12,8 +12,11 @@ body {
   --text-secondary: #3a3a3a;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --dur-1: 300ms;
-  --dur-2: 600ms;
-  --dur-3: 1200ms;
+  --dur-2: 900ms;
+  --dur-3: 1600ms;
+  --motion-fast: 300ms;
+  --motion-standard: 900ms;
+  --motion-slow: 1800ms;
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
@@ -32,12 +35,19 @@ body {
 address {
   font-style: normal;
 }
+
+/* One font, one weight: every heading and bold element matches body text */
+h1, h2, h3, h4, h5, h6, strong, b, th, dt, legend {
+  font-weight: 400;
+}
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: var(--font-inter), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: var(--font-google-sans-flex);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-optical-sizing: none;
+  font-variation-settings: "opsz" 16, "GRAD" 0, "ROND" 0, "slnt" 0, "wdth" 100;
 }
 
 * {
@@ -52,9 +62,58 @@ a {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
   outline: 2px solid #111111;
   outline-offset: 2px;
+}
+
+.siteButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-family: var(--font-google-sans-flex);
+  font-size: 18px;
+  letter-spacing: .02em;
+  line-height: 1.1;
+  text-align: center;
+  transition: background var(--motion-fast) ease, color var(--motion-fast) ease, border-color var(--motion-fast) ease, transform var(--motion-fast) var(--ease-out);
+}
+
+.siteButton:hover { transform: translateY(-2px); }
+.siteButtonPrimary { color: #fff; background: #c95a00; }
+.siteButtonPrimary:hover { color: #fff; background: #a94700; }
+.siteButtonSecondary { border-color: #fff; color: #fff; background: transparent; }
+.siteButtonSecondary:hover { color: #fff; background: rgba(255, 255, 255, .15); }
+.siteButtonSecondaryDark { border-color: #111; color: #111; background: transparent; }
+.siteButtonSecondaryDark:hover { color: #fff; background: #111; }
+
+@media (prefers-reduced-motion: reduce) {
+  .siteButton { transition: none; }
+  .siteButton:hover { transform: none; }
+}
+
+.motionReveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--motion-standard) var(--ease-out), transform var(--motion-standard) var(--ease-out);
+}
+
+.motionReveal[data-motion-visible="true"] { opacity: 1; transform: translateY(0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .motionReveal,
+  .motionReveal[data-motion-visible="true"] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 @media (prefers-color-scheme: dark) {
   html {

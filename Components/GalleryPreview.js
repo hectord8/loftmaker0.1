@@ -31,7 +31,7 @@ export default async function GalleryPreview() {
           </Link>
         ))}
       </div>
-      <Link href="/gallery" className={styles.seeMore}>See More</Link>
+      <Link href="/gallery" className={`${styles.seeMore} siteButton siteButtonSecondaryDark`}>See More</Link>
     </section>
   );
 }

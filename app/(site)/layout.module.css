@@ -80,8 +80,7 @@
 }
 
 .wordmark {
-  font-family: var(--font-oswald), "Helvetica Neue", Arial, sans-serif;
-  font-weight: 500;
+  font-family: var(--font-google-sans-flex);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

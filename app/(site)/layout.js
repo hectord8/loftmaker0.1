@@ -1,4 +1,3 @@
-import { Geist, Geist_Mono, Oswald } from "next/font/google";
 import Image from "next/image";
 
 import styles from "./layout.module.css";
@@ -7,22 +6,6 @@ import { site } from "@/data/site";
 import Link from "next/link";
 import CallButton from "@/Components/CallButton/CallButton";
 import HeaderTitle from "@/Components/HeaderTitle/HeaderTitle";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const oswald = Oswald({
-  variable: "--font-oswald",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-});
 
 export const metadata = {
   metadataBase: new URL(site.url),
@@ -61,7 +44,7 @@ export const metadata = {
 
 export default function SiteLayout({ children }) {
   return (
-    <div className={`${geistSans.variable} ${geistMono.variable} ${oswald.variable}`}>
+    <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -106,7 +89,6 @@ export default function SiteLayout({ children }) {
           alt={`${site.name} logo`}
         />
         </Link>
-        
       </header>
       <main id="main-content">{children}</main>
       <footer className={styles.footer}>

@@ -13,6 +13,7 @@ export default function PreviousProjectsSection() {
       className={`${styles.PreviousProject} ${styles.reveal} ${
         isVisible ? styles.isVisible : ""
       }`}
+      id="projects"
       aria-labelledby="previous-projects-heading"
     >
       <h2 id="previous-projects-heading">Previous Project</h2>

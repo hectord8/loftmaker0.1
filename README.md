@@ -34,3 +34,15 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Contact form setup
+
+The contact form sends enquiries through Resend. Add these variables to `.env.local` and your production hosting environment:
+
+```bash
+RESEND_API_KEY=your_resend_api_key
+CONTACT_EMAIL=loftmaker@live.co.uk
+RESEND_FROM_EMAIL="Loft Maker London <noreply@your-verified-domain.com>"
+```
+
+Verify the sending domain in Resend before using a custom `RESEND_FROM_EMAIL`. For initial testing, omit that variable and Resend's `onboarding@resend.dev` sender will be used.

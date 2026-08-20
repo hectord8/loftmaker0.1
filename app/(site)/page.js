@@ -3,6 +3,8 @@ import Hero from "@/Components/Hero";
 import PreviousProjectsSection from "@/Components/PreviousProjectsSection";
 import Services from "@/Components/Services";
 import GalleryPreview from "@/Components/GalleryPreview";
+import ContactForm from "@/Components/ContactForm/ContactForm";
+import AnimatedSection from "@/Components/AnimatedSection";
 // import LatestPosts from "@/Components/LatestPosts/LatestPosts";
 
 export default async function Home() {
@@ -22,10 +24,19 @@ export default async function Home() {
           budget.
         </p>
         <h3>Get in touch for a free, no-obligation consultation.</h3>
+        <a className={`${styles.introAction} siteButton siteButtonPrimary`} href="#contact">Tell us about your project</a>
       </section>
       <PreviousProjectsSection />
       <Services />
       <GalleryPreview />
+      <AnimatedSection className={styles.contactSection} id="contact" aria-labelledby="contact-heading">
+        <div>
+          <p className={styles.contactEyebrow}>Get in touch</p>
+          <h2 id="contact-heading">Get in touch for a free, no-obligation consultation.</h2>
+          <p>Tell us about your home renovation project and we&apos;ll talk through your options to find what works for your home and your budget.</p>
+        </div>
+        <ContactForm />
+      </AnimatedSection>
       {/* <LatestPosts /> */}
     </div>
   );

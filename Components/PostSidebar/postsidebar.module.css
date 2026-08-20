@@ -64,7 +64,6 @@
 
 .monthLabel {
   font-size: var(--text-1);
-  font-weight: 600;
   margin-bottom: var(--space-1);
 }
 
@@ -100,5 +99,4 @@
 
 .archiveTitle {
   font-size: 14px;
-  font-weight: 500;
 }

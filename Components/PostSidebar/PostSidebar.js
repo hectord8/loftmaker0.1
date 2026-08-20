@@ -45,8 +45,6 @@ export default function PostSidebar({ headings, allPosts }) {
     const ids = headings.map((h) => h._key).filter(Boolean);
     if (!ids.length) return;
 
-    setActiveId(ids[0]);
-
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {

@@ -35,8 +35,8 @@ export default function Services({ projects = [] }) {
            or a full structural overhaul, we specialise in bringing spaces to life — creating homes that work harder for the people who live in them.
           From the moment you get in touch, we take care of everything. Our in-house team handles the full journey: design and planning, structural engineering, 
           roofing, steelwork, groundworks, and all the finishing touches that make a house feel like a home. One team, one point of contact, zero hassle.
-          Every project we deliver is backed by a 10-year structural warranty — because we build things to last, and we stand behind every job we do. 
-          We don't cut corners and we don't settle for anything less than work we're genuinely proud of.
+           Every project we deliver is backed by a 10-year structural warranty — because we build things to last, and we stand behind every job we do.
+           We don&apos;t cut corners and we don&apos;t settle for anything less than work we&apos;re genuinely proud of.
         </p>
         {projects.length > 0 ? (
           <div className={styles.projectList}>
