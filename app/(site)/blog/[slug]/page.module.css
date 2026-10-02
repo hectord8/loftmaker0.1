@@ -1,6 +1,6 @@
 .page {
   width: min(1200px, 92vw);
-  margin: clamp(20vh, 20vh, 45vh) auto clamp(var(--space-5), 10vh, var(--space-8));
+  margin: clamp(var(--space-3), 5vw, var(--space-5)) auto clamp(var(--space-5), 10vh, var(--space-8));
   display: grid;
   grid-template-columns: 260px 1fr;
   gap: var(--space-5);
@@ -71,7 +71,7 @@
 
 .wrapper {
   width: min(1100px, 92vw);
-  margin: clamp(20vh, 20vh, 45vh) auto clamp(var(--space-5), 10vh, var(--space-8));
+  margin: clamp(var(--space-3), 5vw, var(--space-5)) auto clamp(var(--space-5), 10vh, var(--space-8));
   display: grid;
   gap: var(--space-3);
 }

@@ -16,14 +16,22 @@ export default function CallButton() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const tel = `tel:+44${site.phone.slice(1)}`;
-  const displayPhone = `${site.phone.slice(0, 5)} ${site.phone.slice(5)}`;
+  // One source for the number: telHref and phoneDisplay come from data/site.js
+  // so the sticky button, the header, the footer and the structured data can
+  // never disagree about how it is written.
+  const tel = site.telHref;
+  const displayPhone = site.phoneDisplay;
   const mailto = `mailto:${site.email}`;
 
   return (
     <div className={`${styles.wrapper} ${visible ? styles.visible : styles.hidden}`}>
       <div className={styles.container}>
-        <a href={tel} className={styles.link} aria-label={`Call us on ${displayPhone}`}>
+        <a
+          href={tel}
+          className={styles.link}
+          aria-label={`Call us on ${displayPhone}`}
+          data-call-placement="sticky"
+        >
           <span className={styles.iconWrap}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

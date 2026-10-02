@@ -39,9 +39,18 @@
 }
 
 
-.intro a {
-  color: var(--text-primary);
-}
+/*
+  The old rule here was `.intro a { color: var(--text-primary) }`. It out-
+  specified `.siteButtonPrimary`, so the intro CTA rendered dark text on the
+  orange background (4.09:1) and failed WCAG AA.
+
+  Rewriting it as `.intro a:not(.siteButton)` does not help: CSS Modules hashes
+  the class inside :not() too, producing a selector that matches nothing.
+
+  It is simply removed. The global `a { color: inherit }` already does the right
+  thing for both cases - inline links take the colour of the paragraph they sit
+  in, and the CTA keeps the white set by .siteButtonPrimary.
+*/
 
 .projectList {
   margin-top: var(--space-3);
@@ -135,12 +144,14 @@
 
 .heroEyebrow { max-width: 650px; font-size: var(--text-1); }
 .heroOverlay h1 { max-width: 760px; font-size: clamp(42px, 7vw, 86px); line-height: .98; letter-spacing: -2px; }
+.heroTagline { max-width: 760px; font-size: clamp(20px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -0.4px; }
 .heroCopy { max-width: 620px; font-size: clamp(18px, 2vw, 24px); line-height: 1.4; }
 .heroActions { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
 .heroItem { opacity: 0; transform: translateY(14px); animation: heroContentIn var(--motion-standard) var(--ease-out) forwards; }
 .heroEyebrow { animation-delay: 300ms; }
 .heroOverlay h1 { animation-delay: 500ms; }
-.heroCopy { animation-delay: 750ms; }
+.heroTagline { animation-delay: 720ms; }
+.heroCopy { animation-delay: 860ms; }
 .heroActions { animation-delay: 1000ms; }
 
 .image {

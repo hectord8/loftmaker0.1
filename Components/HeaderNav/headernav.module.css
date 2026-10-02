@@ -1,0 +1,172 @@
+/* Sits inside the fixed header. Desktop shows the links inline; small screens
+   collapse them behind a button. */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* Toggle is only useful below the desktop breakpoint. */
+.toggle {
+  display: none;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  min-width: 44px;
+  padding: 8px 12px;
+  border: 1px solid #111;
+  border-radius: 4px;
+  background: rgba(226, 226, 226, 0.9);
+  color: #111;
+  font-family: inherit;
+  font-size: var(--text-1);
+  cursor: pointer;
+}
+
+.toggleIcon {
+  display: grid;
+  gap: 4px;
+  width: 18px;
+}
+
+.toggleIcon span {
+  display: block;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.list,
+.serviceList {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.serviceList {
+  gap: var(--space-1);
+  padding-left: var(--space-2);
+  border-left: 1px solid #8a8a8a;
+}
+
+.link,
+.serviceLink {
+  display: inline-block;
+  padding: 6px 2px;
+  font-size: 15px;
+  line-height: 1.2;
+  color: var(--text-primary);
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.serviceLink {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.link:hover,
+.serviceLink:hover,
+.link:focus-visible,
+.serviceLink:focus-visible {
+  color: #a94700;
+}
+
+.current {
+  color: #a94700;
+  border-bottom-color: #a94700;
+}
+
+.call {
+  display: none;
+}
+
+/* Below this width the links collapse behind the toggle. */
+@media (max-width: 1180px) {
+  .toggle {
+    display: inline-flex;
+  }
+
+  .nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    z-index: 12;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+    min-width: 260px;
+    padding: var(--space-2);
+    background: #e2e2e2;
+    border: 1px solid #111;
+    border-radius: 4px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .list,
+  .serviceList {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding-left: 0;
+    border-left: none;
+  }
+
+  .link,
+  .serviceLink {
+    display: block;
+    width: 100%;
+    padding: 10px 6px;
+    font-size: var(--text-1);
+    border-bottom: 1px solid #c4c4c4;
+  }
+
+  .serviceLink {
+    padding-left: 16px;
+    font-size: 15px;
+  }
+
+  .current {
+    border-bottom-color: #a94700;
+  }
+
+  .call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 14px;
+    border: 1px solid #111;
+    border-radius: 4px;
+    color: #111;
+    font-size: var(--text-1);
+  }
+}
+
+/*
+  Above the breakpoint the header has the wordmark, the logo and seven links,
+  and there is no room for four more without wrapping. The service links drop
+  out of the header here and stay in the mobile panel and the footer, so the
+  list and its divider disappear together rather than leaving a stray rule.
+*/
+@media (min-width: 1181px) {
+  .serviceList {
+    display: none;
+  }
+}

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./latestposts.module.css";
 import useInView from "@/Components/useInView";
 import { urlFor } from "@/sanity/lib/image";
@@ -34,10 +35,13 @@ export default function TimelineClient({ posts }) {
           <article key={post._id} className={styles.entry}>
             <div className={styles.content}>
               {post.image ? (
-                <img
+                <Image
                   className={styles.image}
-                  src={urlFor(post.image).width(1200).fit("max").url()}
-                  alt={post.title || "Update image"}
+                  src={urlFor(post.image).width(1200).auto("format").url()}
+                  alt={post.imageAlt || post.title || ""}
+                  width={post.metadata?.width || 1200}
+                  height={post.metadata?.height || 800}
+                  sizes="(max-width: 800px) 92vw, 40vw"
                   loading="lazy"
                 />
               ) : null}
@@ -53,7 +57,7 @@ export default function TimelineClient({ posts }) {
                 ) : null}
                 {post.slug ? (
                   <Link
-                    href={`/posts/${post.slug.replace(/^\/+/, "")}`}
+                    href={`/blog/${post.slug.replace(/^\/+/, "")}`}
                     className={styles.link}
                   >
                     Read this update &rarr;

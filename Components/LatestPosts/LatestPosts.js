@@ -1,17 +1,17 @@
-import { sanityClient } from "@/sanity/lib/client";
+import { safeFetch } from "@/sanity/lib/safe-fetch";
+import { latestPostsQuery } from "@/sanity/lib/queries";
 import TimelineClient from "./TimelineClient";
 
-const postsQuery = `*[_type in ["post", "posts", "content"]] | order(_createdAt desc)[0...8]{
-  _id,
-  title,
-  _createdAt,
-  "summary": coalesce(summary, excerpt, description, pt::text(body)),
-  "slug": coalesce(slug.current, slug),
-  "image": coalesce(coverImage, mainImage, image)
-}`;
-
+/**
+ * Latest updates timeline.
+ *
+ * Kept wired but not rendered on the homepage: it is a "latest updates" feed,
+ * which duplicates /blog and adds a second, differently-shaped index for the
+ * same content. It is here for the owner to re-enable if wanted.
+ */
 export default async function LatestPosts() {
-  const posts = await sanityClient.fetch(postsQuery);
-  if (!posts || posts.length === 0) return null;
+  const posts = (await safeFetch(latestPostsQuery)) || [];
+  if (posts.length === 0) return null;
+
   return <TimelineClient posts={posts} />;
 }

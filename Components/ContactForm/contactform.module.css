@@ -2,7 +2,9 @@
 .fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--space-4); row-gap: var(--space-3); }
 .form label { display: grid; gap: 10px; font-size: 15px; }
 .labelText { display: inline-flex; align-items: baseline; gap: 3px; }
-.labelText > span { color: #a94700; }
+/* "(required)" is announced by screen readers, so the required state no longer
+   depends on a decorative asterisk that is hidden from assistive tech. */
+.labelText > span { color: #a94700; font-size: 14px; font-weight: 400; }
 .form input, .form select, .form textarea { width: 100%; border: 0; border-bottom: 1px solid #777; border-radius: 0; padding: 10px 0 12px; color: #111; background: transparent; font: inherit; transition: border-color var(--motion-fast) ease, box-shadow var(--motion-fast) ease; }
 .form input::placeholder, .form textarea::placeholder { color: #666; }
 .form input:focus, .form select:focus, .form textarea:focus { outline: none; border-bottom-color: #c95a00; box-shadow: 0 2px 0 #c95a00; }

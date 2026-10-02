@@ -87,8 +87,15 @@ textarea:focus-visible {
 }
 
 .siteButton:hover { transform: translateY(-2px); }
-.siteButtonPrimary { color: #fff; background: #c95a00; }
-.siteButtonPrimary:hover { color: #fff; background: #a94700; }
+/*
+  #c95a00 was the brand orange for the primary button, but white text on it
+  measured 4.25:1 - just under the WCAG AA threshold of 4.5:1 for normal text,
+  and Lighthouse failed every primary CTA on the site for it. #b05200 is the
+  nearest darker orange that passes (5.18:1), so the button keeps its colour
+  family and now meets AA. The hover colour was already compliant.
+*/
+.siteButtonPrimary { color: #fff; background: #b05200; }
+.siteButtonPrimary:hover { color: #fff; background: #8f4200; }
 .siteButtonSecondary { border-color: #fff; color: #fff; background: transparent; }
 .siteButtonSecondary:hover { color: #fff; background: rgba(255, 255, 255, .15); }
 .siteButtonSecondaryDark { border-color: #111; color: #111; background: transparent; }

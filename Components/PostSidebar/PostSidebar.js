@@ -108,7 +108,7 @@ export default function PostSidebar({ headings, allPosts }) {
                   return (
                     <li key={p._id || p.slug}>
                       <Link
-                        href={`/posts/${p.slug.replace(/^\/+/, "")}`}
+                        href={`/blog/${p.slug.replace(/^\/+/, "")}`}
                         className={styles.archiveLink}
                       >
                         <span className={styles.archiveDate}>

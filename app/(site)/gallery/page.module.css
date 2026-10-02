@@ -1,7 +1,6 @@
 .page {
   width: min(1400px, 92vw);
-  margin: 0 auto;
-  padding: clamp(var(--space-4), 6vh, var(--space-8)) 0;
+  margin: 0 auto clamp(var(--space-5), 10vh, var(--space-8));
   display: grid;
   gap: clamp(var(--space-5), 6vh, var(--space-9));
 }
@@ -19,6 +18,19 @@
   padding-right: var(--space-5);
 }
 
+.galleryMeta {
+  font-size: var(--text-1);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #a94700;
+}
+
+.galleryMeta a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -30,6 +42,7 @@
   border-radius: 2px;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.6);
+  margin: 0;
 }
 
 .image {

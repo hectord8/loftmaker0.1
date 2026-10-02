@@ -1,0 +1,327 @@
+/* Shared layout and typography for every inner page. */
+
+.inner {
+  width: min(1200px, 92vw);
+  margin: 0 auto;
+  padding: clamp(var(--space-5), 10vh, var(--space-8)) 0 clamp(var(--space-6), 12vh, var(--space-8));
+  display: grid;
+  gap: clamp(var(--space-4), 5vh, var(--space-6));
+}
+
+/* Breadcrumbs ------------------------------------------------------------- */
+
+.breadcrumb {
+  font-size: var(--text-1);
+  color: var(--text-secondary);
+}
+
+.breadcrumb ol {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.breadcrumb li + li::before {
+  content: "/";
+  color: #777;
+}
+
+.breadcrumb a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.breadcrumb a:hover {
+  color: var(--text-primary);
+}
+
+.breadcrumb [aria-current="page"] {
+  color: var(--text-primary);
+}
+
+/* Page header ------------------------------------------------------------ */
+
+.eyebrow {
+  color: #a94700;
+  font-size: var(--text-1);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+
+.pageHeader h1 {
+  font-size: clamp(34px, 5.5vw, 62px);
+  line-height: 1.02;
+  letter-spacing: -1.6px;
+  max-width: 22ch;
+  margin-bottom: var(--space-3);
+}
+
+.lede {
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  max-width: 62ch;
+}
+
+.headerActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* Prose ------------------------------------------------------------------ */
+
+.prose {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 72ch;
+}
+
+.prose h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.8px;
+  border-bottom: 2px solid #111;
+  width: fit-content;
+  padding-right: var(--space-4);
+  margin-top: var(--space-2);
+  scroll-margin-top: 120px;
+}
+
+.prose h3 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.15;
+  margin-top: var(--space-2);
+  scroll-margin-top: 120px;
+}
+
+.prose p {
+  font-size: var(--text-2);
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.25em;
+  display: grid;
+  gap: var(--space-1);
+}
+
+.prose li {
+  font-size: var(--text-2);
+  line-height: 1.6;
+}
+
+.prose a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: #a94700;
+}
+
+.prose strong {
+  font-weight: 600;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-1);
+}
+
+.prose th,
+.prose td {
+  text-align: left;
+  padding: var(--space-2);
+  border-bottom: 1px solid #999;
+  vertical-align: top;
+}
+
+.prose th {
+  font-weight: 600;
+}
+
+/* Placeholder blocks for facts the owner still has to supply. */
+
+.placeholder {
+  border: 1px dashed #8a8a8a;
+  border-radius: 4px;
+  padding: var(--space-2) var(--space-3);
+  background: rgba(255, 255, 255, 0.55);
+  font-size: var(--text-1);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.placeholderLabel {
+  display: block;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #a94700;
+  margin-bottom: 4px;
+}
+
+/* FAQ -------------------------------------------------------------------- */
+
+.faq {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 72ch;
+}
+
+.faqItem {
+  border: 1px solid #111;
+  border-radius: 4px;
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.faqItem h3 {
+  font-size: var(--text-2);
+  line-height: 1.3;
+  margin-bottom: var(--space-1);
+}
+
+.faqItem p {
+  font-size: var(--text-1);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* CTA band --------------------------------------------------------------- */
+
+.cta {
+  display: grid;
+  gap: var(--space-2);
+  padding: clamp(var(--space-4), 6vw, var(--space-6));
+  background: #d4d4d4;
+  max-width: 72ch;
+}
+
+.cta h2 {
+  font-size: clamp(24px, 3.4vw, 38px);
+  line-height: 1.08;
+}
+
+.cta p {
+  font-size: var(--text-2);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 56ch;
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+.callButton {
+  border-color: #111;
+  color: #111;
+  background: transparent;
+}
+
+.callButton:hover {
+  color: #fff;
+  background: #111;
+}
+
+/* Card grids used by the hub pages ---------------------------------------- */
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-3);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.card {
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+  border: 1px solid #111;
+  border-radius: 4px;
+  padding: var(--space-3);
+  background: rgba(255, 255, 255, 0.6);
+  transition: transform var(--motion-fast) var(--ease-out), background var(--motion-fast) ease;
+  height: 100%;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-3px);
+  background: #f0f0f0;
+}
+
+.card h2,
+.card h3 {
+  font-size: var(--text-2);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.card p {
+  font-size: var(--text-1);
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.cardMore {
+  font-size: var(--text-1);
+  color: #a94700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Skip link, used at the top of every page ------------------------------- */
+
+.skipLink {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  background: #ffffff;
+  color: #111111;
+  border: 2px solid #111111;
+  padding: var(--space-1) var(--space-2);
+  z-index: 30;
+}
+
+.skipLink:focus {
+  left: var(--space-2);
+  top: var(--space-2);
+  width: auto;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+}

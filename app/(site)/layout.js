@@ -1,140 +1,94 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./layout.module.css";
-import { services } from "@/data/services";
 import { site } from "@/data/site";
-import Link from "next/link";
+import { services } from "@/data/services";
+import { businessSchema } from "@/lib/jsonld";
+import { safeFetch } from "@/sanity/lib/safe-fetch";
+import { companySettingsQuery } from "@/sanity/lib/queries";
+
 import CallButton from "@/Components/CallButton/CallButton";
+import CallTracking from "@/Components/CallTracking";
+import Footer from "@/Components/Footer/Footer";
+import HeaderNav from "@/Components/HeaderNav/HeaderNav";
 import HeaderTitle from "@/Components/HeaderTitle/HeaderTitle";
+import inner from "@/Components/Seo/inner.module.css";
+import JsonLd from "@/Components/Seo/JsonLd";
 
-export const metadata = {
-  metadataBase: new URL(site.url),
-  title: site.name,
-  description: site.description,
-  keywords: site.keywords,
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: site.name,
-    description: site.description,
-    url: site.url,
-    siteName: site.name,
-    images: [
-      {
-        url: site.image,
-        width: 1200,
-        height: 630,
-        alt: "Loft conversion project exterior",
-      },
-    ],
-    locale: "en_GB",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.name,
-    description: site.description,
-    images: [site.image],
-  },
-  icons: {
-    icon: "/logo.png",
-  },
-};
+/**
+ * No `metadata` export here on purpose.
+ *
+ * This layout wraps every page, so exporting metadata from it stamped the same
+ * title, description and `canonical: "/"` onto all of them - which is how
+ * /gallery ended up canonicalising to the homepage. Every page now exports its
+ * own metadata through buildPageMetadata(); this file only owns the sitewide
+ * structured data and the shared chrome.
+ */
+export default async function SiteLayout({ children }) {
+  const company = await safeFetch(companySettingsQuery);
 
-export default function SiteLayout({ children }) {
   return (
     <div>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "LocalBusiness",
-            name: site.name,
+      <JsonLd
+        data={[
+          businessSchema(),
+          {
+            "@type": "WebSite",
+            "@id": `${site.url}/#website`,
             url: site.url,
-            description: site.description,
-            areaServed: site.areaServed,
-            telephone: site.phone,
-            email: site.email,
-            openingHours: site.openingHours,
-            image: `${site.url}${site.image}`,
-            sameAs: [site.instagram],
-            hasOfferCatalog: {
-              "@type": "OfferCatalog",
-              name: "Services",
-              itemListElement: services.map((service) => ({
-                "@type": "Offer",
-                itemOffered: {
-                  "@type": "Service",
-                  name: service.title.replace(/\s*-\s*$/, ""),
-                  description: service.description,
-                },
-              })),
-            },
-          }),
-        }}
+            name: site.name,
+            inLanguage: "en-GB",
+            publisher: { "@id": `${site.url}/#business` },
+          },
+          {
+            "@type": "ItemList",
+            name: "Services",
+            itemListElement: services.map((service, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              item: {
+                "@type": "Service",
+                name: service.title,
+                url: `${site.url}${service.href}`,
+              },
+            })),
+          },
+        ]}
       />
-      
+
+      <a className={inner.skipLink} href="#main-content">
+        Skip to main content
+      </a>
+
       <header className={styles.header}>
-        <Link href="/">
-         <HeaderTitle className={`${styles.display} ${styles.wordmark}`}>{site.name}</HeaderTitle>
+        <Link href="/" aria-label={`${site.name} home`}>
+          <HeaderTitle className={`${styles.display} ${styles.wordmark}`}>
+            {site.name}
+          </HeaderTitle>
         </Link>
-        
-        <Link href="/">
-        <Image
-          src="/logo.png"
-          width={120}
-          height={120}
-          alt={`${site.name} logo`}
-        />
-        </Link>
-      </header>
-      <main id="main-content">{children}</main>
-      <footer className={styles.footer}>
-        <div className={styles.top}>
-          <div className={styles.column}>
-            <h3>Contact</h3>
-            <address>
-              <ul>
-                <li>Craig Darrach</li>
-                <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-                <li>{site.phone}</li>
-                <li>
-                  <a href={site.instagram}>@Loft Maker</a>
-                </li>
-              </ul>
-            </address>
-          </div>
-          <div className={styles.column}>
-            <h3>Office hours </h3>
-            <ul>
-              <li>Mon -Fri 8:00 - 18:00</li>
-              <li> Sat: 10:00 - 15:00</li>
-              <li> Sunday CLOSED</li>
-            </ul>
-          </div>
-          <div className={styles.column}>
-            <h3>Loft Maker London</h3>
-            <p>
-              Reliable construction services London homeowners count on.
-              No-nonsense contracting across London and Essex.
-            </p>
-          </div>
-        </div>
-        <div className={styles.bottom}>
+
+        <HeaderNav />
+
+        <Link href="/" aria-label={`${site.name} home`}>
           <Image
-            src="/logo.png"
+            src={site.logo}
             width={120}
             height={120}
-            alt="Loft Maker London logo"
+            // The logo is above the fold in a fixed header. Loading it eagerly
+            // keeps it out of the lazy-load path; `priority` stays reserved for
+            // the single hero image.
+            loading="eager"
+            alt={`${site.name} logo`}
           />
+        </Link>
+      </header>
 
-        </div>
-      </footer>
+      <main id="main-content">{children}</main>
+
+      <Footer company={company} />
       <CallButton />
-      
+      <CallTracking />
     </div>
-    
   );
 }
