@@ -133,6 +133,22 @@
 
 .heroBrandHidden { opacity: 0; transform: translateY(-12px); pointer-events: none; }
 
+/*
+  Below 480px the fixed header's 120px logo is pushed left by the 90%-width,
+  right-aligned header and collides with this wordmark: at 375px the wordmark
+  runs to roughly x=270 while the logo starts around x=236. The hero already
+  carries the business name in the H1 and the document title, so the decorative
+  duplicate is dropped rather than repositioned.
+
+  `display` rather than `opacity`, because HeroWordmark toggles .heroBrandHidden
+  with an IntersectionObserver; hiding by opacity would fight that JS and can
+  flash on scroll. This span is aria-hidden, so nothing is lost for assistive
+  technology.
+*/
+@media (max-width: 480px) {
+  .heroBrand { display: none; }
+}
+
 .heroEyebrow { max-width: 650px; font-size: var(--text-1); }
 .heroOverlay h1 { max-width: 760px; font-size: clamp(42px, 7vw, 86px); line-height: .98; letter-spacing: -2px; }
 .heroCopy { max-width: 620px; font-size: clamp(18px, 2vw, 24px); line-height: 1.4; }

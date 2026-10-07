@@ -107,4 +107,19 @@
     flex-direction: column;
     text-align: center;
   }
+
+  /*
+    The desktop footer is deliberately inset by margin-left: 10%, which is a
+    fine asymmetric offset on a wide screen but pushes the whole footer 10%
+    (about 37px on a 375px phone) to the right. The logo is centred inside
+    .bottom, so it inherited that offset and landed about 26px right of the
+    viewport centre, which read as "the logo is not centred".
+
+    Dropping the inset on mobile makes the footer span the viewport, so
+    .bottom's existing align-items: center puts the logo on the true centre
+    line. The desktop offset is left untouched.
+  */
+  .footer {
+    margin-left: 0;
+  }
 }
