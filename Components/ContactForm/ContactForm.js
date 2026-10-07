@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { site } from "@/data/site";
-import { trackLead } from "@/lib/analytics";
 import styles from "./contactform.module.css";
 
 const initialForm = {
@@ -20,9 +19,6 @@ export default function ContactForm() {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
-  // Captured before the form is cleared, so the conversion event carries the
-  // project type the visitor actually chose.
-  const [submittedProjectType, setSubmittedProjectType] = useState("");
 
   function updateField(event) {
     setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
@@ -45,11 +41,8 @@ export default function ContactForm() {
         throw new Error(result.error || "Please try again.");
       }
 
-      setSubmittedProjectType(form.projectType);
       setForm(initialForm);
       setStatus("success");
-      // Conversion signal for the enquiry that actually arrived.
-      trackLead({ projectType: submittedProjectType });
     } catch (submissionError) {
       setError(submissionError.message);
       setStatus("error");
@@ -60,19 +53,19 @@ export default function ContactForm() {
     <form className={styles.form} onSubmit={handleSubmit}>
       <div className={styles.fields}>
         <label>
-          <span className={styles.labelText}>Name <span className={styles.required}>(required)</span></span>
+          <span className={styles.labelText}>Name <span aria-hidden="true">*</span></span>
           <input name="name" value={form.name} onChange={updateField} required autoComplete="name" />
         </label>
         <label>
-          <span className={styles.labelText}>Email <span className={styles.required}>(required)</span></span>
+          <span className={styles.labelText}>Email <span aria-hidden="true">*</span></span>
           <input type="email" name="email" value={form.email} onChange={updateField} required autoComplete="email" />
         </label>
         <label>
-          <span className={styles.labelText}>Phone <span className={styles.required}>(required)</span></span>
+          <span className={styles.labelText}>Phone <span aria-hidden="true">*</span></span>
           <input type="tel" name="phone" value={form.phone} onChange={updateField} required autoComplete="tel" />
         </label>
         <label>
-          <span className={styles.labelText}>Project type <span className={styles.required}>(required)</span></span>
+          <span className={styles.labelText}>Project type <span aria-hidden="true">*</span></span>
           <select name="projectType" value={form.projectType} onChange={updateField} required>
             <option value="">Choose a service</option>
             <option>Loft conversion</option>
@@ -83,11 +76,11 @@ export default function ContactForm() {
           </select>
         </label>
         <label>
-          <span className={styles.labelText}>Project location <span className={styles.required}>(required)</span></span>
+          <span className={styles.labelText}>Project location <span aria-hidden="true">*</span></span>
           <input name="location" value={form.location} onChange={updateField} required placeholder="Town or postcode" />
         </label>
         <label className={styles.fullWidth}>
-          <span className={styles.labelText}>Tell us about your project <span className={styles.required}>(required)</span></span>
+          <span className={styles.labelText}>Tell us about your project <span aria-hidden="true">*</span></span>
           <textarea name="message" value={form.message} onChange={updateField} required rows="5" />
         </label>
         <label className={styles.honeypot} aria-hidden="true">
@@ -96,28 +89,15 @@ export default function ContactForm() {
         </label>
       </div>
 
-      <button
-        className="siteButton siteButtonPrimary"
-        type="submit"
-        disabled={status === "submitting"}
-        aria-busy={status === "submitting"}
-      >
+      <button className="siteButton siteButtonPrimary" type="submit" disabled={status === "submitting"}>
         {status === "submitting" ? "Sending…" : "Get in touch"}
       </button>
 
       {status === "success" ? (
-        <p className={styles.success} role="status">
-          Thanks — your enquiry has been sent. We’ll be in touch soon.
-        </p>
+        <p className={styles.success} role="status">Thanks — your enquiry has been sent. We’ll be in touch soon.</p>
       ) : null}
       {status === "error" ? (
-        <p className={styles.error} role="alert">
-          {error} You can call us on{" "}
-          <a href={site.telHref} data-call-placement="form-error">
-            {site.phoneDisplay}
-          </a>
-          .
-        </p>
+        <p className={styles.error} role="alert">{error} You can call us on <a href={`tel:+44${site.phone.slice(1)}`}>{site.phone}</a>.</p>
       ) : null}
     </form>
   );

@@ -27,11 +27,9 @@ export default function HeaderTitle({ children, className }) {
     };
   }, []);
 
-  // Decorative brand wordmark, not a heading. It used to render an <h1>, which
-  // gave every page two H1s; each page now has exactly one, in its content.
   return (
-    <div className={`${className} ${heroPassed ? styles.visible : styles.hidden}`}>
+    <h1 className={`${className} ${heroPassed ? styles.visible : styles.hidden}`}>
       {children}
-    </div>
+    </h1>
   );
 }
