@@ -1,8 +1,11 @@
-import { PortableText } from "@portabletext/react";
+import { cache } from "react";
+import { notFound } from "next/navigation";
+import { PortableText, toPlainText } from "@portabletext/react";
 
 import { sanityClient } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import PostSidebar from "@/Components/PostSidebar/PostSidebar";
+import { site } from "@/data/site";
 import styles from "./page.module.css";
 
 const postQuery = `*[_type in ["post", "posts", "content"] && (slug.current == $slug || slug == $slug)][0]{
@@ -21,6 +24,56 @@ const archiveQuery = `*[_type in ["post", "posts", "content"]] | order(published
 }`;
 
 export const revalidate = 60;
+
+async function resolveSlug(params) {
+  const resolvedParams = await Promise.resolve(params);
+  const rawSlug = resolvedParams?.slug;
+  return Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
+}
+
+// Shared by generateMetadata and the page so Sanity is queried once per request.
+const getPost = cache((slug) => sanityClient.fetch(postQuery, { slug }));
+
+function describePost(post) {
+  if (post.summary) return post.summary;
+  const text = Array.isArray(post.body) ? toPlainText(post.body).trim() : "";
+  if (!text) return site.description;
+  return text.length > 155 ? `${text.slice(0, 152).trimEnd()}...` : text;
+}
+
+export async function generateMetadata({ params }) {
+  const slug = await resolveSlug(params);
+  const post = slug ? await getPost(slug) : null;
+  if (!post) return { title: "Post not found", robots: { index: false } };
+
+  const title = post.title || "Untitled";
+  const description = describePost(post);
+  const path = `/posts/${post.slug}`;
+  const image = post.image
+    ? urlFor(post.image).width(1200).height(630).fit("crop").url()
+    : site.image;
+
+  return {
+    title,
+    description,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      url: path,
+      publishedTime: post.publishedAt || post._createdAt,
+      modifiedTime: post._updatedAt,
+      images: [{ url: image, width: 1200, height: 630, alt: title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [image],
+    },
+  };
+}
 
 function extractHeadings(body) {
   if (!Array.isArray(body)) return [];
@@ -46,32 +99,16 @@ const portableComponents = {
 };
 
 export default async function PostPage({ params }) {
-  const resolvedParams = await Promise.resolve(params);
-  const rawSlug = resolvedParams?.slug;
-  const slug = Array.isArray(rawSlug) ? rawSlug[0] : rawSlug;
-
-  if (!slug) {
-    return (
-      <div className={styles.wrapper}>
-        <h1>Post not found</h1>
-        <p>This post is missing a slug.</p>
-      </div>
-    );
-  }
+  const slug = await resolveSlug(params);
+  if (!slug) notFound();
 
   const [post, allPosts] = await Promise.all([
-    sanityClient.fetch(postQuery, { slug }),
+    getPost(slug),
     sanityClient.fetch(archiveQuery),
   ]);
 
-  if (!post) {
-    return (
-      <div className={styles.wrapper}>
-        <h1>Post not found</h1>
-        <p>We could not find this post.</p>
-      </div>
-    );
-  }
+  // A real 404 instead of a 200 "not found" page, so search engines drop dead URLs.
+  if (!post) notFound();
 
   const imageUrl = post.image
     ? urlFor(post.image).width(1400).height(900).fit("crop").url()
@@ -80,14 +117,34 @@ export default async function PostPage({ params }) {
   const headings = extractHeadings(post.body);
   const dateLabel = post.publishedAt || post._createdAt;
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title || "Untitled",
+    description: describePost(post),
+    datePublished: dateLabel,
+    dateModified: post._updatedAt || dateLabel,
+    mainEntityOfPage: `${site.url}/posts/${post.slug}`,
+    image: imageUrl || `${site.url}${site.image}`,
+    author: { "@type": "Organization", name: site.name, url: site.url },
+    publisher: { "@id": `${site.url}/#business` },
+  };
+
   return (
     <div className={styles.page}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
       <PostSidebar headings={headings} allPosts={allPosts} />
       <article className={styles.main}>
         <header className={styles.header}>
           {dateLabel ? (
             <p className={styles.meta}>
-              Published {new Date(dateLabel).toDateString()}
+              Published{" "}
+              <time dateTime={dateLabel}>{new Date(dateLabel).toDateString()}</time>
             </p>
           ) : null}
           <h1>{post.title || "Untitled"}</h1>

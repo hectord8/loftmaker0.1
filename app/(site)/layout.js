@@ -9,16 +9,18 @@ import HeaderTitle from "@/Components/HeaderTitle/HeaderTitle";
 
 export const metadata = {
   metadataBase: new URL(site.url),
-  title: site.name,
+  title: {
+    default: site.title,
+    template: `%s | ${site.name}`,
+  },
   description: site.description,
   keywords: site.keywords,
-  alternates: {
-    canonical: "/",
-  },
+  applicationName: site.name,
+  formatDetection: { telephone: true, email: true },
   openGraph: {
-    title: site.name,
+    title: site.title,
     description: site.description,
-    url: site.url,
+    url: "/",
     siteName: site.name,
     images: [
       {
@@ -33,12 +35,13 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
+    title: site.title,
     description: site.description,
     images: [site.image],
   },
   icons: {
     icon: "/logo.png",
+    apple: "/icon-192.png",
   },
 };
 
@@ -50,12 +53,14 @@ export default function SiteLayout({ children }) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "LocalBusiness",
+            "@type": "HomeAndConstructionBusiness",
+            "@id": `${site.url}/#business`,
             name: site.name,
             url: site.url,
+            logo: `${site.url}/logo.png`,
             description: site.description,
-            areaServed: site.areaServed,
-            telephone: site.phone,
+            areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
+            telephone: site.phoneE164,
             email: site.email,
             openingHours: site.openingHours,
             image: `${site.url}${site.image}`,

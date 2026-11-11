@@ -7,6 +7,10 @@ import ContactForm from "@/Components/ContactForm/ContactForm";
 import AnimatedSection from "@/Components/AnimatedSection";
 // import LatestPosts from "@/Components/LatestPosts/LatestPosts";
 
+export const metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default async function Home() {
   return (
     <div className={styles.page}>

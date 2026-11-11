@@ -80,6 +80,7 @@
 }
 
 .wordmark {
+  font-size: 2em; /* keeps the old <h1> size now that the header wordmark is a <p> */
   font-family: var(--font-google-sans-flex);
   letter-spacing: 0.08em;
   text-transform: uppercase;

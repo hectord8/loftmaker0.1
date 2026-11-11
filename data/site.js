@@ -1,8 +1,9 @@
 export const site = {
   name: "Loft Maker London",
-  url: "https://www.lmlbuild.uk/",
+  url: "https://www.lmlbuild.uk",
+  title: "Loft Conversions & Extensions in London and Essex | Loft Maker London",
   description:
-    "Reliable construction services London homeowners count on. No-nonsense contracting across London and Essex.",
+    "Loft conversions, side extensions, GRP flat roofing and structural steel across London and Essex. Clear pricing, honest timelines and a free, no-obligation consultation.",
   keywords: [
     "loft conversions",
     "loft conversion London",
@@ -13,8 +14,9 @@ export const site = {
     "GRP flat roof",
     "structural steel",
   ],
-  areaServed: "London area",
+  areaServed: ["London", "Essex", "Chingford", "South Woodford"],
   phone: "07736777527",
+  phoneE164: "+447736777527",
   email: "loftmaker@live.co.uk",
   openingHours: ["Mo-Fr 08:00-18:00", "Sa 10:00-15:00", "Su Closed"],
   instagram: "https://www.instagram.com/lmlbuildlondon/?hl=en",

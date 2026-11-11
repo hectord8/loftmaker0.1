@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
 
   return (
-    <html lang="en">
+    <html lang="en-GB">
       <body className={googleSansFlex.variable}>
         {gaId && (
           <>

@@ -13,12 +13,31 @@ const galleryQuery = `*[_type == "gallery"]{
 
 export const revalidate = 60;
 
+const galleryDescription =
+  "Photos of our loft conversions, extensions, GRP flat roofs and renovation work across London and Essex.";
+
+export const metadata = {
+  title: "Project Gallery",
+  description: galleryDescription,
+  alternates: { canonical: "/gallery" },
+  openGraph: {
+    title: "Project Gallery",
+    description: galleryDescription,
+    url: "/gallery",
+  },
+};
+
+function GalleryHeading() {
+  return <h1 className="visuallyHidden">Loft Maker London project gallery</h1>;
+}
+
 export default async function GalleryPage() {
   const galleries = await sanityClient.fetch(galleryQuery);
 
   if (!galleries || galleries.length === 0) {
     return (
       <div className={styles.page}>
+        <GalleryHeading />
         <p className={styles.empty}>No galleries yet.</p>
       </div>
     );
@@ -26,6 +45,7 @@ export default async function GalleryPage() {
 
   return (
     <div className={styles.page}>
+      <GalleryHeading />
       {galleries.map((gallery) => (
         <section key={gallery.title} className={styles.section}>
           <h2 className={styles.title}>{gallery.title}</h2>
@@ -36,7 +56,7 @@ export default async function GalleryPage() {
                   <img
                     className={styles.image}
                     src={urlFor(img.image).width(800).height(600).fit("crop").url()}
-                    alt={img.caption || "Gallery image"}
+                    alt={img.caption || `${gallery.title} project photo`}
                     loading="lazy"
                   />
                   {img.caption ? (

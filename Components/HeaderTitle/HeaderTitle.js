@@ -28,8 +28,8 @@ export default function HeaderTitle({ children, className }) {
   }, []);
 
   return (
-    <h1 className={`${className} ${heroPassed ? styles.visible : styles.hidden}`}>
+    <p className={`${className} ${heroPassed ? styles.visible : styles.hidden}`}>
       {children}
-    </h1>
+    </p>
   );
 }
