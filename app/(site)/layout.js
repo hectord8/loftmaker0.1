@@ -62,6 +62,14 @@ export default function SiteLayout({ children }) {
             areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
             telephone: site.phoneE164,
             email: site.email,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: site.address.street,
+              addressLocality: site.address.town,
+              addressRegion: site.address.county,
+              postalCode: site.address.postcode,
+              addressCountry: site.address.country,
+            },
             openingHours: site.openingHours,
             image: `${site.url}${site.image}`,
             sameAs: [site.instagram],
@@ -103,6 +111,9 @@ export default function SiteLayout({ children }) {
             <address>
               <ul>
                 <li>Craig Darrach</li>
+                <li>
+                  {site.address.street}, {site.address.town}, {site.address.postcode}
+                </li>
                 <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
                 <li>{site.phone}</li>
                 <li>

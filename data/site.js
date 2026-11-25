@@ -14,11 +14,18 @@ export const site = {
     "GRP flat roof",
     "structural steel",
   ],
-  areaServed: ["London", "Essex", "Chingford", "South Woodford"],
+  areaServed: ["London", "Essex", "Chingford", "South Woodford", "Rayleigh"],
   phone: "07736777527",
   phoneE164: "+447736777527",
   email: "loftmaker@live.co.uk",
-  openingHours: ["Mo-Fr 08:00-18:00", "Sa 10:00-15:00", "Su Closed"],
+  address: {
+    street: "5 Hillview Road",
+    town: "Rayleigh",
+    county: "Essex",
+    postcode: "SS6 7HX",
+    country: "GB",
+  },
+  openingHours: ["Mo-Fr 08:00-18:00", "Sa 10:00-15:00"], // days not listed are closed
   instagram: "https://www.instagram.com/lmlbuildlondon/?hl=en",
   image: "/Main_Images/35.jpg",
 };
