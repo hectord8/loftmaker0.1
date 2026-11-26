@@ -46,10 +46,12 @@ export async function generateMetadata({ params }) {
   const post = slug ? await getPost(slug) : null;
   if (!post) return { title: "Post not found", robots: { index: false } };
 
-  const title = post.title || "Untitled";
-  const description = describePost(post);
+  const title = post.seo?.title || post.title || "Untitled";
+  const description = post.seo?.description || describePost(post);
   const path = `/posts/${post.slug}`;
-  const image = post.image
+  const image = post.seo?.image
+    ? urlFor(post.seo.image).width(1200).height(630).fit("crop").url()
+    : post.image
     ? urlFor(post.image).width(1200).height(630).fit("crop").url()
     : site.image;
 

@@ -1,7 +1,8 @@
-import {defineConfig} from "sanity";
-import {deskTool} from "sanity/desk";
+import { defineConfig } from "sanity";
+import { structureTool } from "sanity/structure";
 
-import {schemaTypes} from "./sanity/schemaTypes";
+import { schemaTypes } from "./sanity/schemaTypes";
+import { structure, templates, documentActions } from "./sanity/structure";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || "";
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
@@ -12,8 +13,12 @@ export default defineConfig({
   projectId,
   dataset,
   basePath: "/studio",
-  plugins: [deskTool()],
+  plugins: [structureTool({ structure })],
   schema: {
     types: schemaTypes,
+    templates,
+  },
+  document: {
+    actions: documentActions,
   },
 });

@@ -7,15 +7,20 @@ const featuredQuery = `*[_type == "gallery"][0]{
   "featuredImages": images[featured == true][0...6]
 }`;
 
-export default async function GalleryPreview() {
-  const data = await sanityClient.fetch(featuredQuery);
+export default async function GalleryPreview({ heading = "Projects" }) {
+  let data = null;
+  try {
+    data = await sanityClient.fetch(featuredQuery, {}, { next: { revalidate: 60 } });
+  } catch {
+    return null;
+  }
   const images = data?.featuredImages;
 
   if (!images || images.length === 0) return null;
 
   return (
     <section className={styles.galleryPreview}>
-      <h2>Projects</h2>
+      <h2>{heading}</h2>
       <div className={styles.galleryGrid}>
         {images.map((img) => (
           <Link key={img._key} href="/gallery" className={styles.galleryCard}>

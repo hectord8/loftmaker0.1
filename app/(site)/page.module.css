@@ -145,6 +145,10 @@
   flash on scroll. This span is aria-hidden, so nothing is lost for assistive
   technology.
 */
+@media (max-width: 900px) {
+  .heroBrand { top: 96px; }
+}
+
 @media (max-width: 480px) {
   .heroBrand { display: none; }
 }

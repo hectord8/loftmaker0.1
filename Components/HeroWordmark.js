@@ -2,10 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import { site } from "@/data/site";
 import styles from "../app/(site)/page.module.css";
 
-export default function HeroWordmark() {
+export default function HeroWordmark({ name }) {
   const [heroPassed, setHeroPassed] = useState(false);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ export default function HeroWordmark() {
 
   return (
     <span className={`${styles.heroBrand} ${heroPassed ? styles.heroBrandHidden : ""}`} aria-hidden="true">
-      {site.name}
+      {name}
     </span>
   );
 }

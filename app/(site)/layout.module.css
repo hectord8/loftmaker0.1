@@ -19,17 +19,6 @@
   height: auto;
 }
 
-.header {
-  position: fixed;
-  width: 90%;
-  top: var(--space-2);
-  justify-self: center;
-  align-items: center;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-}
-
 .footer {
   margin-left: 10%;
   padding: clamp(var(--space-3), 6vw, var(--space-6)) 0;
@@ -75,26 +64,7 @@
   gap: var(--space-2);
 }
 
-.display {
-  display: block;
-}
-
-.wordmark {
-  font-size: 2em; /* keeps the old <h1> size now that the header wordmark is a <p> */
-  font-family: var(--font-google-sans-flex);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 @media (max-width: 768px) {
-  .display {
-    display: none;
-  }
-
-  .header {
-    justify-content: right;
-  }
-
   .top {
     font-size: var(--text-1);
   }

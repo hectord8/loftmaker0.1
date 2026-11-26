@@ -2,17 +2,16 @@
 import Image from "next/image";
 
 import styles from "./previous.module.css";
-import { projectImages } from "@/data/projects";
 
-export default function PreviousProject({ images = projectImages }) {
-
+// images: [{ url, alt }] — resolved to URLs on the server.
+export default function PreviousProject({ images = [] }) {
   return (
     <div className={styles.gallery}>
       {images.map((image, i) => (
-        <div className={styles.item} key={`${image.name}-${i}`}>
+        <div className={styles.item} key={`${image.url}-${i}`}>
           <Image
             src={image.url}
-            alt={`Previous loft conversion / extension project photo ${i + 1}`}
+            alt={image.alt || `Previous loft conversion / extension project photo ${i + 1}`}
             fill
             sizes="(max-width: 800px) 100vw, 25vw"
             quality={90}

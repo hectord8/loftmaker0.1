@@ -1,51 +1,61 @@
 import Image from "next/image";
 
 import styles from "./layout.module.css";
-import { services } from "@/data/services";
 import { site } from "@/data/site";
+import { getHomePage, getLoftPages, getSiteSettings } from "@/sanity/lib/content";
 import Link from "next/link";
 import CallButton from "@/Components/CallButton/CallButton";
-import HeaderTitle from "@/Components/HeaderTitle/HeaderTitle";
+import SiteHeader from "@/Components/SiteHeader/SiteHeader";
 
-export const metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: site.title,
-    template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  keywords: site.keywords,
-  applicationName: site.name,
-  formatDetection: { telephone: true, email: true },
-  openGraph: {
-    title: site.title,
-    description: site.description,
-    url: "/",
-    siteName: site.name,
-    images: [
-      {
-        url: site.image,
-        width: 1200,
-        height: 630,
-        alt: "Loft conversion project exterior",
-      },
-    ],
-    locale: "en_GB",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.title,
-    description: site.description,
-    images: [site.image],
-  },
-  icons: {
-    icon: "/logo.png",
-    apple: "/icon-192.png",
-  },
-};
+export async function generateMetadata() {
+  const settings = await getSiteSettings();
+  return {
+    metadataBase: new URL(site.url),
+    title: {
+      default: settings.seoTitle,
+      template: `%s | ${settings.name}`,
+    },
+    description: settings.seoDescription,
+    keywords: settings.seoKeywords,
+    applicationName: settings.name,
+    formatDetection: { telephone: true, email: true },
+    openGraph: {
+      title: settings.seoTitle,
+      description: settings.seoDescription,
+      url: "/",
+      siteName: settings.name,
+      images: [
+        {
+          url: site.image,
+          width: 1200,
+          height: 630,
+          alt: "Loft conversion project exterior",
+        },
+      ],
+      locale: "en_GB",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: settings.seoTitle,
+      description: settings.seoDescription,
+      images: [site.image],
+    },
+    icons: {
+      icon: "/logo.png",
+      apple: "/icon-192.png",
+    },
+  };
+}
 
-export default function SiteLayout({ children }) {
+export default async function SiteLayout({ children }) {
+  const [settings, home, loftPages] = await Promise.all([
+    getSiteSettings(),
+    getHomePage(),
+    getLoftPages(),
+  ]);
+  const loftTypes = loftPages.filter((page) => page.pageType === "type");
+
   return (
     <div>
       <script
@@ -55,28 +65,28 @@ export default function SiteLayout({ children }) {
             "@context": "https://schema.org",
             "@type": "HomeAndConstructionBusiness",
             "@id": `${site.url}/#business`,
-            name: site.name,
+            name: settings.name,
             url: site.url,
             logo: `${site.url}/logo.png`,
-            description: site.description,
-            areaServed: site.areaServed.map((name) => ({ "@type": "Place", name })),
-            telephone: site.phoneE164,
-            email: site.email,
+            description: settings.seoDescription,
+            areaServed: settings.areaServed.map((name) => ({ "@type": "Place", name })),
+            telephone: settings.phoneE164,
+            email: settings.email,
             address: {
               "@type": "PostalAddress",
-              streetAddress: site.address.street,
-              addressLocality: site.address.town,
-              addressRegion: site.address.county,
-              postalCode: site.address.postcode,
+              streetAddress: settings.address.street,
+              addressLocality: settings.address.town,
+              addressRegion: settings.address.county,
+              postalCode: settings.address.postcode,
               addressCountry: site.address.country,
             },
             openingHours: site.openingHours,
             image: `${site.url}${site.image}`,
-            sameAs: [site.instagram],
+            sameAs: [settings.instagram].filter(Boolean),
             hasOfferCatalog: {
               "@type": "OfferCatalog",
               name: "Services",
-              itemListElement: services.map((service) => ({
+              itemListElement: home.services.map((service) => ({
                 "@type": "Offer",
                 itemOffered: {
                   "@type": "Service",
@@ -85,24 +95,10 @@ export default function SiteLayout({ children }) {
                 },
               })),
             },
-          }),
+          }).replace(/</g, "\\u003c"),
         }}
       />
-      
-      <header className={styles.header}>
-        <Link href="/">
-         <HeaderTitle className={`${styles.display} ${styles.wordmark}`}>{site.name}</HeaderTitle>
-        </Link>
-        
-        <Link href="/">
-        <Image
-          src="/logo.png"
-          width={120}
-          height={120}
-          alt={`${site.name} logo`}
-        />
-        </Link>
-      </header>
+      <SiteHeader name={settings.name} loftPages={loftTypes.map(({ slug, title }) => ({ slug, title }))} />
       <main id="main-content">{children}</main>
       <footer className={styles.footer}>
         <div className={styles.top}>
@@ -110,32 +106,31 @@ export default function SiteLayout({ children }) {
             <h3>Contact</h3>
             <address>
               <ul>
-                <li>Craig Darrach</li>
+                {settings.contactName ? <li>{settings.contactName}</li> : null}
                 <li>
-                  {site.address.street}, {site.address.town}, {site.address.postcode}
+                  {[settings.address.street, settings.address.town, settings.address.postcode].filter(Boolean).join(", ")}
                 </li>
-                <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-                <li>{site.phone}</li>
-                <li>
-                  <a href={site.instagram}>@Loft Maker</a>
-                </li>
+                <li><a href={`mailto:${settings.email}`}>{settings.email}</a></li>
+                <li><a href={`tel:${settings.phoneE164}`}>{settings.phone}</a></li>
+                {settings.instagram ? (
+                  <li>
+                    <a href={settings.instagram}>@Loft Maker</a>
+                  </li>
+                ) : null}
               </ul>
             </address>
           </div>
           <div className={styles.column}>
             <h3>Office hours </h3>
             <ul>
-              <li>Mon -Fri 8:00 - 18:00</li>
-              <li> Sat: 10:00 - 15:00</li>
-              <li> Sunday CLOSED</li>
+              {settings.officeHours.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
             </ul>
           </div>
           <div className={styles.column}>
-            <h3>Loft Maker London</h3>
-            <p>
-              Reliable construction services London homeowners count on.
-              No-nonsense contracting across London and Essex.
-            </p>
+            <h3>{settings.footerHeading}</h3>
+            <p>{settings.footerText}</p>
           </div>
         </div>
         <div className={styles.bottom}>
@@ -143,12 +138,12 @@ export default function SiteLayout({ children }) {
             src="/logo.png"
             width={120}
             height={120}
-            alt="Loft Maker London logo"
+            alt={`${settings.name} logo`}
           />
 
         </div>
       </footer>
-      <CallButton />
+      <CallButton phone={settings.phone} email={settings.email} />
       
     </div>
     

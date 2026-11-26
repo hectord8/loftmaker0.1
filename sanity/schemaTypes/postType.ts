@@ -2,7 +2,7 @@ import {defineField, defineType} from 'sanity'
 
 export const postType = defineType({
   name: 'post',
-  title: 'Post',
+  title: 'Blog post',
   type: 'document',
   fields: [
     defineField({
@@ -23,13 +23,22 @@ export const postType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: 'summary',
+      title: 'Summary',
+      type: 'text',
+      rows: 3,
+      description: 'Shown under the title and used as the Google description.',
+    }),
+    defineField({
       name: 'image',
       type: 'image',
+      options: {hotspot: true},
     }),
     defineField({
       name: 'body',
       type: 'array',
       of: [{type: 'block'}],
     }),
+    defineField({name: 'seo', type: 'seo'}),
   ],
 })

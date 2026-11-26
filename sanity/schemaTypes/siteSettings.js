@@ -1,0 +1,60 @@
+import { defineArrayMember, defineField, defineType } from "sanity";
+
+export default defineType({
+  name: "siteSettings",
+  title: "Site settings",
+  type: "document",
+  groups: [
+    { name: "business", title: "Business details", default: true },
+    { name: "footer", title: "Footer" },
+    { name: "seo", title: "SEO defaults" },
+  ],
+  fields: [
+    defineField({ name: "name", title: "Business name", type: "string", group: "business" }),
+    defineField({ name: "phone", title: "Phone number", type: "string", group: "business", description: "UK format, e.g. 07736777527" }),
+    defineField({ name: "email", title: "Email", type: "string", group: "business" }),
+    defineField({ name: "contactName", title: "Contact name", type: "string", group: "business" }),
+    defineField({
+      name: "address",
+      title: "Address",
+      type: "object",
+      group: "business",
+      fields: [
+        defineField({ name: "street", type: "string" }),
+        defineField({ name: "town", type: "string" }),
+        defineField({ name: "county", type: "string" }),
+        defineField({ name: "postcode", type: "string" }),
+      ],
+    }),
+    defineField({ name: "instagram", title: "Instagram URL", type: "url", group: "business" }),
+    defineField({
+      name: "areaServed",
+      title: "Areas served",
+      type: "array",
+      group: "business",
+      of: [defineArrayMember({ type: "string" })],
+      options: { layout: "tags" },
+    }),
+    defineField({
+      name: "officeHours",
+      title: "Office hours (as shown in the footer)",
+      type: "array",
+      group: "footer",
+      of: [defineArrayMember({ type: "string" })],
+      description: "One line per row, e.g. “Mon–Fri 8:00–18:00”.",
+    }),
+    defineField({ name: "footerHeading", title: "Footer heading", type: "string", group: "footer" }),
+    defineField({ name: "footerText", title: "Footer text", type: "text", rows: 3, group: "footer" }),
+    defineField({ name: "seoTitle", title: "Default page title", type: "string", group: "seo" }),
+    defineField({ name: "seoDescription", title: "Default description", type: "text", rows: 3, group: "seo" }),
+    defineField({
+      name: "seoKeywords",
+      title: "Keywords",
+      type: "array",
+      group: "seo",
+      of: [defineArrayMember({ type: "string" })],
+      options: { layout: "tags" },
+    }),
+  ],
+  preview: { prepare: () => ({ title: "Site settings" }) },
+});

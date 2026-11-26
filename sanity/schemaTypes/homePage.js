@@ -1,0 +1,81 @@
+import { defineArrayMember, defineField, defineType } from "sanity";
+
+export default defineType({
+  name: "homePage",
+  title: "Homepage",
+  type: "document",
+  groups: [
+    { name: "hero", title: "Hero", default: true },
+    { name: "intro", title: "Intro" },
+    { name: "services", title: "Services" },
+    { name: "projects", title: "Projects" },
+    { name: "contact", title: "Contact" },
+    { name: "seo", title: "SEO" },
+  ],
+  fields: [
+    defineField({ name: "heroEyebrow", title: "Small line above the headline", type: "string", group: "hero" }),
+    defineField({ name: "heroHeading", title: "Headline", type: "string", group: "hero" }),
+    defineField({ name: "heroText", title: "Text under the headline", type: "text", rows: 3, group: "hero" }),
+    defineField({ name: "heroButtonLabel", title: "Main button label", type: "string", group: "hero" }),
+    defineField({
+      name: "heroImage",
+      title: "Hero image",
+      type: "image",
+      options: { hotspot: true },
+      group: "hero",
+      description: "Leave blank to keep the current photo.",
+    }),
+    defineField({
+      name: "trustPoints",
+      title: "Trust points (shown under the hero)",
+      type: "array",
+      group: "hero",
+      of: [defineArrayMember({ type: "string" })],
+      description: "Short selling points, e.g. “10-year structural warranty”.",
+    }),
+    defineField({ name: "introHeading", title: "Intro heading", type: "string", group: "intro" }),
+    defineField({ name: "introText", title: "Intro text", type: "text", rows: 6, group: "intro" }),
+    defineField({ name: "introSubheading", title: "Intro sub-heading", type: "string", group: "intro" }),
+    defineField({ name: "introButtonLabel", title: "Intro button label", type: "string", group: "intro" }),
+    defineField({ name: "servicesHeading", title: "Services heading", type: "string", group: "services" }),
+    defineField({ name: "servicesText", title: "Services text", type: "text", rows: 8, group: "services" }),
+    defineField({
+      name: "services",
+      title: "Services",
+      type: "array",
+      group: "services",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "service",
+          fields: [
+            defineField({ name: "title", type: "string", validation: (rule) => rule.required() }),
+            defineField({ name: "description", type: "text", rows: 4 }),
+          ],
+          preview: { select: { title: "title", subtitle: "description" } },
+        }),
+      ],
+    }),
+    defineField({ name: "projectsHeading", title: "Previous project heading", type: "string", group: "projects" }),
+    defineField({
+      name: "projectImages",
+      title: "Previous project photos",
+      type: "array",
+      group: "projects",
+      description: "Leave empty to keep the current photos.",
+      of: [
+        defineArrayMember({
+          type: "image",
+          options: { hotspot: true },
+          fields: [{ name: "alt", title: "Description", type: "string" }],
+        }),
+      ],
+    }),
+    defineField({ name: "galleryHeading", title: "Gallery preview heading", type: "string", group: "projects" }),
+    defineField({ name: "contactEyebrow", title: "Contact small line", type: "string", group: "contact" }),
+    defineField({ name: "contactHeading", title: "Contact heading", type: "string", group: "contact" }),
+    defineField({ name: "contactText", title: "Contact text", type: "text", rows: 3, group: "contact" }),
+    defineField({ name: "seo", type: "seo", group: "seo" }),
+  ],
+  preview: { prepare: () => ({ title: "Homepage" }) },
+});

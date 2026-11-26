@@ -15,7 +15,7 @@ const initialForm = {
   company: "",
 };
 
-export default function ContactForm() {
+export default function ContactForm({ phone = site.phone }) {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
@@ -97,7 +97,7 @@ export default function ContactForm() {
         <p className={styles.success} role="status">Thanks — your enquiry has been sent. We’ll be in touch soon.</p>
       ) : null}
       {status === "error" ? (
-        <p className={styles.error} role="alert">{error} You can call us on <a href={`tel:+44${site.phone.slice(1)}`}>{site.phone}</a>.</p>
+        <p className={styles.error} role="alert">{error} You can call us on <a href={`tel:+44${phone.replace(/\s/g, "").slice(1)}`}>{phone}</a>.</p>
       ) : null}
     </form>
   );

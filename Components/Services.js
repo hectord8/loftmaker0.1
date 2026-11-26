@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { services } from "@/data/services";
 import styles from "../app/(site)/page.module.css";
 import useInView from "@/Components/useInView";
 
-export default function Services({ projects = [] }) {
+export default function Services({ heading, text, services = [], projects = [] }) {
   const { ref, isVisible } = useInView();
 
   return (
@@ -29,15 +28,8 @@ export default function Services({ projects = [] }) {
       </div>
 
       <div className={`${styles.whatwedo} ${styles.servicesCopy}`}>
-        <h2 id="services-heading">What We Do</h2>
-        <p>
-          At Loft Maker London, we believe every property has untapped potential. Whether it&apos;s a side return, a rear extension, an unused outbuilding,
-           or a full structural overhaul, we specialise in bringing spaces to life — creating homes that work harder for the people who live in them.
-          From the moment you get in touch, we take care of everything. Our in-house team handles the full journey: design and planning, structural engineering, 
-          roofing, steelwork, groundworks, and all the finishing touches that make a house feel like a home. One team, one point of contact, zero hassle.
-           Every project we deliver is backed by a 10-year structural warranty — because we build things to last, and we stand behind every job we do.
-           We don&apos;t cut corners and we don&apos;t settle for anything less than work we&apos;re genuinely proud of.
-        </p>
+        <h2 id="services-heading">{heading}</h2>
+        <p>{text}</p>
         {projects.length > 0 ? (
           <div className={styles.projectList}>
             <h3 className={styles.projectHeading}>Recent Projects</h3>

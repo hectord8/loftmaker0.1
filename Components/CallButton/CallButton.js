@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { site } from '@/data/site';
 import styles from './callbutton.module.css';
 
-export default function CallButton() {
+export default function CallButton({ phone = site.phone, email = site.email }) {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -16,9 +16,9 @@ export default function CallButton() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const tel = `tel:+44${site.phone.slice(1)}`;
-  const displayPhone = `${site.phone.slice(0, 5)} ${site.phone.slice(5)}`;
-  const mailto = `mailto:${site.email}`;
+  const tel = `tel:+44${phone.replace(/\s/g, "").slice(1)}`;
+  const displayPhone = `${phone.replace(/\s/g, "").slice(0, 5)} ${phone.replace(/\s/g, "").slice(5)}`;
+  const mailto = `mailto:${email}`;
 
   return (
     <div className={`${styles.wrapper} ${visible ? styles.visible : styles.hidden}`}>
@@ -46,7 +46,7 @@ export default function CallButton() {
             <span className={styles.linkDetail}>{displayPhone}</span>
           </span>
         </a>
-        <a href={mailto} className={styles.link} aria-label={`Email us at ${site.email}`}>
+        <a href={mailto} className={styles.link} aria-label={`Email us at ${email}`}>
           <span className={styles.iconWrap}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ export default function CallButton() {
           </span>
           <span className={styles.linkContent}>
             <span className={styles.linkLabel}>Email us</span>
-            <span className={styles.linkDetail}>{site.email}</span>
+            <span className={styles.linkDetail}>{email}</span>
           </span>
         </a>
       </div>
